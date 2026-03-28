@@ -1,5 +1,8 @@
-# ZIPs de distribución y fuentes
+# ZIPs de distribución
 *.zip
+
+# Sources (se regeneran desde repos y p4k)
+versions/*/sources/
 
 # Archivos temporales
 *.tmp
