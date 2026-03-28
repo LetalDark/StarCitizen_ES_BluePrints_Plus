@@ -17,7 +17,7 @@ Localización al español de Star Citizen. Combina la traducción de Thord82 con
 ```
 extract_p4k.py                          # Script para extraer global.ini del Data.p4k
 versions/
-└── {version}/                          # Ej: 4.7.0-hotfix
+└── {version}/                          # Ej: 4.7.0-hotfix_11545720
     ├── sources/
     │   ├── global_thord82.ini          # Traducción ES de Thord82
     │   ├── global_blueprints.ini       # MrKraken con blueprints (EN)
