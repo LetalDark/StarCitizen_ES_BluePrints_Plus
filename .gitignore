@@ -4,8 +4,14 @@
 # Sources (se regeneran desde repos y p4k)
 versions/*/sources/
 
-# Claude Code config
+# Herramientas locales (no van al repo publico)
+tools/
+*.py
+__pycache__/
+
+# Claude Code
 .claude/
+CLAUDE.md
 
 # Archivos temporales
 *.tmp
