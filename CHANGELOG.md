@@ -1,5 +1,33 @@
 # Changelog
 
+## v1.2.0 — 2026-03-30
+
+**Fuentes utilizadas:**
+- Thord82: 4.7.0-hotfix (2026-03-28)
+- MrKraken/StarStrings: v4 (2026-03-28)
+- ExoAE/ScCompLangPack: v0.10.4 (2026-03-28) — NUEVA
+- BeltaKoda/ScCompLangPackRemix: 4.7.0-LIVE (2026-03-26) — NUEVA
+- Data.p4k: 4.7.0-hotfix build 11545720
+
+**Cambios:**
+- Unificado a un solo output: global.ini (antes habia global.ini + global_plus.ini)
+- Un solo ZIP de distribucion (eliminado BluePrints_Plus.zip)
+- Añadidas 2 nuevas fuentes: ExoAE y BeltaKoda (componentes de naves)
+- Añadido prefijo clase/grado a 368 componentes de naves (formato Mil2A, Civ1C, etc.)
+- Añadida marca [BP] en 216 titulos de misiones con blueprints
+- Añadida marca [!] en 8 sustancias ilegales (WiDoW, SLAM, Maze, etc.)
+- Acortado HUD de mineria: Inestabilidad → Inest:, Resistencia → Res:
+- Acortado Hephaestanite → Heph en commodities
+- Unificados 18 minerales raw a (Bruto) en vez de mezcla (Raw)/(Crudo)
+- Mejorados 5 titulos de hauling con ruta origen>destino y formato compacto
+- Descargado contracts.ini delta de MrKraken como fuente de referencia
+
+**Estadisticas:**
+- Lineas en global.ini: 87.656
+- Blueprints traducidos: 232
+- Componentes con clase/grado: 368
+- Pools cubiertos: 45/45 del DCB
+
 ## v1.1.3 — 2026-03-28
 
 **Cambios:**
