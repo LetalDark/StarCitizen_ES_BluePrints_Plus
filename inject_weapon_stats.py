@@ -1177,10 +1177,68 @@ def main():
         # Mark as found
         weapons[key_classname] = None  # consumed
 
+    # --- Patch magazine descriptions with mass ---
+    mag_patched = 0
+    if args.source == "tested":
+        mag_csv = version_dir / "sources" / "tested" / "sin_crafteo" / "tab_Magazine.csv"
+        if mag_csv.is_file():
+            mag_mass = {}
+            with open(mag_csv, "r", encoding="utf-8") as f:
+                reader = csv.reader(f)
+                next(reader)
+                for row in reader:
+                    filename = row[13].strip().lower() if len(row) > 13 else ""
+                    mass_str = row[12].strip() if len(row) > 12 else ""
+                    if filename and mass_str:
+                        try:
+                            mag_mass[filename] = float(mass_str)
+                        except ValueError:
+                            pass
+
+            # Also build from scunpacked for fallback
+            for fps_item in fps_items:
+                si = fps_item.get("stdItem", {})
+                if si.get("Type", "").startswith("WeaponAttachment.Magazine"):
+                    cn = fps_item.get("className", "").lower()
+                    m = si.get("Mass", 0)
+                    if cn and m and cn not in mag_mass:
+                        mag_mass[cn] = m
+
+            mag_pattern = re.compile(r"^item_Desc(.+_mag[^=]*)=", re.IGNORECASE)
+            for i, line in enumerate(modified_lines):
+                mm = mag_pattern.match(line)
+                if not mm:
+                    continue
+                mag_cn = mm.group(1).lower()
+                mass = mag_mass.get(mag_cn, 0)
+                if mass <= 0:
+                    continue
+
+                eq_pos = line.index("=")
+                key_part = line[:eq_pos + 1]
+                value_part = line[eq_pos + 1:].rstrip("\n").rstrip("\r")
+
+                # Check if mass already injected
+                if f"{fmt_num(mass)} kg" in value_part:
+                    continue
+
+                # Find "Capacidad: X" or "Capacity: X" and append mass
+                new_value = re.sub(
+                    r"(Capacidad:\s*\d+|Capacity:\s*\d+)",
+                    rf"\1 | {fmt_num(mass)} kg",
+                    value_part,
+                    count=1
+                )
+                if new_value != value_part:
+                    modified_lines[i] = key_part + new_value + "\n"
+                    mag_patched += 1
+
     # Report unmatched weapons
     unmatched = [cn for cn, val in weapons.items() if val is not None]
 
     print(f"Patched: {patched} descriptions")
+    if mag_patched:
+        print(f"Patched: {mag_patched} magazine descriptions (mass)")
     if unmatched:
         print(f"Unmatched weapons (no item_Desc found): {len(unmatched)}")
         # Show first 20
