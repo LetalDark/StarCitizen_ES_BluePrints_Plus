@@ -549,50 +549,95 @@ def classify_weapon_tested(fire_mode, pellets, alpha, dps_sustained, dps_burst, 
     return "energy"
 
 
+def _fire_mode_label(mode_str):
+    """Convert raw fire mode string to a clean label."""
+    ml = mode_str.lower().strip()
+    if "charge burst" in ml:
+        return "Full"
+    if "charge" in ml:
+        return "Full"
+    if "combined s" in ml:
+        return "Hot"  # combined slug mode = hot (Prism)
+    if "combined" in ml:
+        return "Auto"  # combined damage types = auto mode
+    if "heat 50%" in ml or "hot" in ml:
+        return "Hot"
+    if ml.startswith("rapid") or ml.startswith("auto"):
+        return "Auto"
+    if ml.startswith("single") or ml.startswith("semi"):
+        return "Semi"
+    if "burst 5" in ml:
+        return "Burst5"
+    if "burst 3" in ml or ml.startswith("burst"):
+        return "Burst"
+    if "rapid burst" in ml:
+        return "Burst"
+    if ml.startswith("beam"):
+        return "Beam"
+    if ml.startswith("slug"):
+        return "Slug"
+    if ml.startswith("double"):
+        return "Doble"
+    return ml.split()[0].capitalize()
+
+
 def build_stats_block_tested(item, category):
     """
     Build stats block for tested source data.
 
-    Uses the same build_stats_block function but for beam weapons,
-    produces a simpler format since Excel doesn't have FullDamageRange/ZeroDamageRange.
+    Format: one line per fire mode with label, then shared stats lines.
     """
-    if category == "beam":
-        # Beam weapons from Excel: simple DPS | Alpha format
-        si = item.get("stdItem", {})
-        weapon = si.get("Weapon", {})
-        damage = weapon.get("Damage", {})
-        ammo = si.get("Ammunition", {})
+    si = item.get("stdItem", {})
+    weapon = si.get("Weapon", {})
+    damage = weapon.get("Damage", {})
+    ammo = si.get("Ammunition", {})
 
-        dps_total = damage.get("DpsTotal") or 0
-        alpha_total = damage.get("AlphaTotal") or 0
-        max_per_mag = damage.get("MaxPerMag") or 0
-        speed = ammo.get("Speed", 0) or 0
-        penetration = ammo.get("MaxPenetrationThickness", 0) or 0
-        drop_dist = get_damage_drop_distance(ammo)
+    dps_total = damage.get("DpsTotal") or 0
+    alpha_total = damage.get("AlphaTotal") or 0
+    max_per_mag = damage.get("MaxPerMag") or 0
+    speed = ammo.get("Speed", 0) or 0
+    penetration = ammo.get("MaxPenetrationThickness", 0) or 0
+    if penetration > 10:
+        penetration = 0
+    drop_dist = get_damage_drop_distance(ammo)
 
-        lines = []
-        lines.append(f"DPS: {fmt_num(dps_total)} | Alpha: {fmt_num(alpha_total)}")
+    # Get all modes from item
+    all_modes = item.get("_all_modes", [])
 
-        extras = []
-        if max_per_mag > 0:
-            extras.append(f"Dmg/Cargador: {fmt_num(max_per_mag)}")
-        if speed > 0:
-            extras.append(f"Vel. Proyectil: {fmt_num(speed)} m/s")
-        if extras:
-            lines.append(" | ".join(extras))
+    lines = []
 
-        pen_extras = []
-        if penetration > 0:
-            pen_extras.append(f"Penetración: {fmt_num(penetration)}m")
-        if drop_dist > 0:
-            pen_extras.append(f"Caída daño: desde {fmt_num(drop_dist)}m")
-        if pen_extras:
-            lines.append(" | ".join(pen_extras))
-
-        return "\\n".join(lines)
+    if all_modes and len(all_modes) >= 1:
+        # Multi-mode or labeled single mode
+        for m in all_modes:
+            label = _fire_mode_label(m["mode"])
+            if label is None:
+                continue
+            lines.append(f"{label}: DPS: {fmt_num(m['dps_sus'])} | Alpha: {fmt_num(m['alpha'])}")
     else:
-        # Non-beam: use standard build_stats_block
-        return build_stats_block(item, category)
+        # Fallback: single mode from primary data
+        fire_mode = weapon.get("FireMode", "")
+        label = _fire_mode_label(fire_mode) or "Normal"
+        lines.append(f"{label}: DPS: {fmt_num(dps_total)} | Alpha: {fmt_num(alpha_total)}")
+
+    # Shared stats: Dmg/Cargador | Vel. Proyectil
+    extras2 = []
+    if max_per_mag > 0:
+        extras2.append(f"Dmg/Cargador: {fmt_num(max_per_mag)}")
+    if speed > 0:
+        extras2.append(f"Vel. Proyectil: {fmt_num(speed)} m/s")
+    if extras2:
+        lines.append(" | ".join(extras2))
+
+    # Shared stats: Penetración | Caída daño
+    extras3 = []
+    if 0 < penetration <= 10:
+        extras3.append(f"Penetración: {fmt_num(penetration)}m")
+    if drop_dist > 0:
+        extras3.append(f"Caída daño: desde {fmt_num(drop_dist)}m")
+    if extras3:
+        lines.append(" | ".join(extras3))
+
+    return "\\n".join(lines)
 
 
 def load_tested_weapons(version_dir, fps_items):
@@ -669,50 +714,107 @@ def load_tested_weapons(version_dir, fps_items):
     matched = 0
 
     for weapon_name, rows in raw_weapons:
-        # Select the best row:
-        # 1. If a "Combined" mode exists, use that
-        # 2. Otherwise, use the mode with highest DPS Sustained
-        best_row = None
-        best_dps = -1
-
+        # Parse all modes for this weapon
+        parsed_modes = []
         for row in rows:
-            fire_mode = row[7].strip() if len(row) > 7 else ''
-            dps_s_str = row[19].strip() if len(row) > 19 else ''
-
-            if not dps_s_str:
+            fm = row[7].strip() if len(row) > 7 else ''
+            if not fm:
                 continue
-
             try:
-                dps_s = _parse_csv_float(dps_s_str)
+                dps_s = _parse_csv_float(row[19]) if len(row) > 19 and row[19].strip() else 0
             except ValueError:
                 continue
+            try:
+                dps_b = _parse_csv_float(row[20]) if len(row) > 20 and row[20].strip() else 0
+            except ValueError:
+                dps_b = 0
+            try:
+                a = _parse_csv_float(row[16]) if len(row) > 16 and row[16].strip() else 0
+            except ValueError:
+                a = 0
+            pel = int(_parse_csv_float(row[12])) if len(row) > 12 and row[12].strip() else 1
+            if pel < 1:
+                pel = 1
+            parsed_modes.append({"row": row, "mode": fm, "dps_sus": dps_s, "dps_burst": dps_b, "alpha": a, "pellets": pel})
 
-            if "combined" in fire_mode.lower():
-                best_row = row
-                best_dps = dps_s
-                break  # Combined always wins
-
-            if dps_s > best_dps:
-                best_dps = dps_s
-                best_row = row
-
-        if best_row is None or best_dps <= 0:
+        if not parsed_modes:
             skipped_zero_dps += 1
             continue
 
-        # Extract stats from best row
-        fire_mode = best_row[7].strip()
+        # Detect multi-mode type and select primary/secondary
+        mode_types = [m["mode"].lower() for m in parsed_modes]
+        has_combined = any("combined" in mt for mt in mode_types)
+        has_heat = any("heat 50%" in mt for mt in mode_types)
+        has_charge = any("charge" in mt for mt in mode_types)
+
+        # Force heat detection for weapons with slug->pellet heat ramp (Prism)
+        if not has_heat and "slug" in mode_types and len(parsed_modes) >= 2:
+            has_heat = True
+
+        # Select primary mode
+        if has_combined:
+            primary = next(m for m in parsed_modes if "combined" in m["mode"].lower())
+        else:
+            primary = max(parsed_modes, key=lambda m: m["dps_sus"])
+
+        if primary["dps_sus"] <= 0:
+            skipped_zero_dps += 1
+            continue
+
+        # Build multi-mode DPS tag
+        multi_mode_tag = ""
+        multi_mode_alpha = ""
+        if has_heat and len(parsed_modes) >= 2:
+            # Standard heat: "Heat" + "Heat 50%"
+            cold = next((m for m in parsed_modes if "heat" in m["mode"].lower() and "50%" not in m["mode"]), None)
+            hot = next((m for m in parsed_modes if "50%" in m["mode"]), None)
+            # Slug->pellet heat (Prism): "Slug" is cold, other mode is hot
+            if not cold or not hot:
+                slug = next((m for m in parsed_modes if "slug" in m["mode"].lower()), None)
+                other = next((m for m in parsed_modes if "slug" not in m["mode"].lower() and "combined" not in m["mode"].lower()), None)
+                if slug and other:
+                    cold = slug
+                    hot = other
+            if cold and hot and abs(cold["dps_sus"] - hot["dps_sus"]) > 1:
+                primary = cold  # Use cold as primary (starting DPS)
+                multi_mode_tag = f" (caliente: {fmt_num(hot['dps_sus'])})"
+                if abs(cold["alpha"] - hot["alpha"]) > 0.5:
+                    multi_mode_alpha = f"{fmt_num(cold['alpha'])}-{fmt_num(hot['alpha'])}"
+        elif has_charge and not has_combined:
+            normal = next((m for m in parsed_modes if "charge" not in m["mode"].lower()), None)
+            charged = next((m for m in parsed_modes if "charge" in m["mode"].lower()), None)
+            if normal and charged and charged["dps_sus"] > 0:
+                primary = normal  # Use normal as primary
+                multi_mode_tag = f" (cargado: {fmt_num(charged['dps_sus'])})"
+        elif len(parsed_modes) >= 2 and not has_combined:
+            # Selectable modes (Rapid/Single, Double/Single, etc.)
+            modes_by_dps = sorted(parsed_modes, key=lambda m: m["dps_sus"], reverse=True)
+            primary = modes_by_dps[0]
+            secondary = modes_by_dps[1]
+            if secondary["dps_sus"] > 0 and secondary["dps_sus"] != primary["dps_sus"]:
+                # Describe secondary mode briefly
+                sec_name = secondary["mode"].split()[0].lower()
+                if sec_name in ("single", "semi"):
+                    sec_label = "semi"
+                elif sec_name in ("burst"):
+                    sec_label = "burst"
+                elif sec_name in ("rapid", "auto"):
+                    sec_label = "auto"
+                elif sec_name in ("double"):
+                    sec_label = "doble"
+                else:
+                    sec_label = sec_name
+                multi_mode_tag = f" / {fmt_num(secondary['dps_sus'])} ({sec_label})"
+
+        # Extract stats from primary row
+        best_row = primary["row"]
+        fire_mode = primary["mode"]
+        alpha = primary["alpha"]
+        pellets = primary["pellets"]
+        dps_sustained = primary["dps_sus"]
+        dps_burst = primary["dps_burst"]
         speed = _parse_csv_float(best_row[8]) if len(best_row) > 8 else 0
         range_m = _parse_csv_float(best_row[10]) if len(best_row) > 10 else 0
-        pellets = int(_parse_csv_float(best_row[12])) if len(best_row) > 12 else 1
-        if pellets < 1:
-            pellets = 1
-        dmg_pellet = _parse_csv_float(best_row[14]) if len(best_row) > 14 else 0
-        dmg_shot = _parse_csv_float(best_row[15]) if len(best_row) > 15 else 0
-        alpha = _parse_csv_float(best_row[16]) if len(best_row) > 16 else 0
-        fire_rate = _parse_csv_float(best_row[18]) if len(best_row) > 18 else 0
-        dps_sustained = _parse_csv_float(best_row[19]) if len(best_row) > 19 else 0
-        dps_burst = _parse_csv_float(best_row[20]) if len(best_row) > 20 else 0
         drop_dist = _parse_csv_float(best_row[26]) if len(best_row) > 26 else 0
         drop_pm = _parse_csv_float(best_row[27]) if len(best_row) > 27 else 0
         drop_min = _parse_csv_float(best_row[28]) if len(best_row) > 28 else 0
@@ -748,16 +850,41 @@ def load_tested_weapons(version_dir, fps_items):
         # Detect burst
         is_burst = "burst" in fire_mode.lower()
 
+        # Build list of all displayable modes
+        # If a Combined mode exists, use it instead of the individual damage types
+        combined = [m for m in parsed_modes if "combined" in m["mode"].lower() and m["dps_sus"] > 0]
+        has_slug = any("slug" in m["mode"].lower() for m in parsed_modes)
+        if combined and not has_slug:
+            # Pure combined (e.g., Killshot): only show combined
+            all_modes = combined
+        elif combined and has_slug:
+            # Slug + Combined (e.g., Prism): show Slug as cold, Combined as hot
+            slug_modes = [m for m in parsed_modes if "slug" in m["mode"].lower() and m["dps_sus"] > 0]
+            all_modes = slug_modes + combined
+        else:
+            all_modes = [m for m in parsed_modes if m["dps_sus"] > 0]
+
+        # Remove duplicate modes with same DPS (e.g., Quartz Beam Heat + Beam Heat 50% both 225)
+        deduped = []
+        seen_dps = set()
+        for m in all_modes:
+            key = (round(m["dps_sus"], 1), round(m["alpha"], 1))
+            if key not in seen_dps:
+                seen_dps.add(key)
+                deduped.append(m)
+        all_modes = deduped
+
         # Build item dict in scunpacked-compatible format
         item = {
             "className": class_name,
+            "_all_modes": all_modes,
             "stdItem": {
                 "Weapon": {
                     "Damage": {
                         "DpsTotal": dps_sustained,
                         "AlphaTotal": alpha,
                         "MaxPerMag": dmg_mag,
-                        "Dps": {},   # Not used for tested — active_dps won't show type breakdown
+                        "Dps": {},
                         "Alpha": {},
                     },
                     "Modes": [{"FireType": "burst" if is_burst else fire_mode.lower(), "PelletsPerShot": pellets}],
