@@ -1123,7 +1123,7 @@ def main():
                         help="Version directory name (default: auto-detect latest)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Show changes without writing")
-    parser.add_argument("--source", choices=["scunpacked", "tested"], default="scunpacked",
+    parser.add_argument("--source", choices=["tested", "game", "scunpacked"], default="tested",
                         help="Data source: scunpacked (default) or tested (spreadsheet CSV)")
     args = parser.parse_args()
 
@@ -1147,18 +1147,16 @@ def main():
     print()
 
     # Load weapons based on source
-    fps_items = None
     if args.source == "tested":
         weapons = load_tested_weapons(version_dir, global_ini_path)
+    elif args.source == "game":
+        print("ERROR: --source game no implementado todavía. Usa --source tested.", file=sys.stderr)
+        print("Pendiente: arreglar parse_dcb.py para extraer stats de armas del Game2.dcb.")
+        sys.exit(1)
     else:
-        # scunpacked source requires fps-items.json
-        if not fps_json_path.is_file():
-            print(f"ERROR: {fps_json_path} not found.", file=sys.stderr)
-            sys.exit(1)
-        with open(fps_json_path, "r", encoding="utf-8") as f:
-            fps_items = json.load(f)
-        print(f"FPS JSON: {fps_json_path}")
-        weapons = load_scunpacked_weapons(fps_items)
+        print("ERROR: --source scunpacked desactivado. Usa --source tested.", file=sys.stderr)
+        print("scunpacked no es una fuente fiable. Pendiente: --source game desde archivos del juego.")
+        sys.exit(1)
 
     # Load global.ini (UTF-8 with BOM)
     with open(global_ini_path, "r", encoding="utf-8-sig") as f:
