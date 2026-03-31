@@ -78,9 +78,8 @@ Cuando se actualicen las fuentes (nueva versión del juego, Thord82 o MrKraken):
 - Thord82 + diff_es + diff_p4k_es → `global.ini`
 
 ### 5. Inyección de stats reales
-- Descargar JSONs de scunpacked-data (sparse clone con LFS)
-- `python patch_beam_stats.py` — parchear DPS de armas beam en JSONs
-- `python inject_weapon_stats.py` — inyectar stats en descripciones del global.ini
+- `python inject_weapon_stats.py --source tested` — inyectar stats desde Excel testeado + Data.p4k
+- Aplica: armas FPS (328), cargadores (41), armaduras (774), 10 name fixes
 - **Revisión del usuario** in-game
 
 ### 6. Verificación contra DCB
@@ -135,17 +134,13 @@ python parse_dcb.py --dump BlueprintPoolRecord -o x.json  # Exportar a JSON
 
 Referencia completa de datos del DCB: `.claude/guides/dcb-data.md`
 
-### patch_beam_stats.py — Parchear DPS de armas beam
+### patch_beam_stats.py — Parchear DPS de armas beam (fuente alternativa)
 
-Scunpacked no calcula DPS para armas beam (muestra 0). Este script descarga los JSONs individuales y parchea los agregados.
+Solo necesario para `--source scunpacked` (desactivado). Con `--source tested` los beams vienen del Excel.
 
 ```bash
 python patch_beam_stats.py                          # Parchear fps-items.json y ship-items.json
-python patch_beam_stats.py --scunpacked-dir DIR     # Directorio manual
 ```
-
-Armas beam conocidas: Quartz (275 DPS), Ripper (165 DPS), Exodus-10 nave (15000 DPS).
-Armas sin datos: Parallax, Fresnel (híbridas proyectil→beam, scunpacked no tiene sus datos).
 
 ### inject_weapon_stats.py — Inyectar stats en descripciones
 
