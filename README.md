@@ -14,7 +14,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 6. **Marca sustancias ilegales** con `[!]` para avisar antes de transportarlas
 7. **Mejora titulos de hauling** añadiendo la ruta (origen>destino) al titulo del contrato
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
-9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Rango, Peso, Penetracion) con datos testeados in-game
+9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Rango, Peso, Caida de daño) con datos testeados in-game
 10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto) y peso de cargadores
 11. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
 12. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, nombres de armadura incorrectos)
@@ -45,7 +45,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 9 | Minerales | Hephaestanite → Heph + unificacion de (Raw)/(Crudo) a (Bruto) | 19 | MrKraken/ExoAE |
 | 10 | Hauling titles | Ruta origen>destino en titulos de transporte de carga | 5 | MrKraken |
 | 11 | Limpieza | Trailing spaces eliminados | 604 | BeltaKoda |
-| 12 | Stats armas FPS | DPS, Alpha, Vel, Rango, Peso, Penetracion, modos de fuego | 328 | Tests in-game + Data.p4k |
+| 12 | Stats armas FPS | DPS, Alpha, Vel, Rango, Peso, Caida de daño, modos de fuego | 328 | Tests in-game + Data.p4k |
 | 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
 | 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 774 | Tests in-game + Data.p4k |
 | 15 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
@@ -108,7 +108,6 @@ Accesorios: optica (S1), Cañon (S1), Debajo del cañon (S1)
 [Burst] DPS: 48.8 | Alpha: 39 | 600 m/s | 1200m
 [Full] DPS: 44.6 | Alpha: 171.6 | 600 m/s | 1200m
 2.8 kg | Dmg/Cargador: 780
-Penetracion: 0.5m
 ```
 
 | Etiqueta | Significado |
