@@ -1233,12 +1233,95 @@ def main():
                     modified_lines[i] = key_part + new_value + "\n"
                     mag_patched += 1
 
+    # --- Patch armor descriptions with mass, stun, impact ---
+    armor_patched = 0
+    # Map damage reduction % to tier stats from Excel
+    # The game shows "Reducción de daño: X%" — we match on that to determine tier
+    ARMOR_TIER_STATS = {
+        "40": {"stun": 60, "impact": 35},   # Heavy
+        "75": {"stun": 60, "impact": 35},   # Hv AI
+        "25": {"stun": 60, "impact": 35},   # Hv Util / Bespokesuit
+        "30": {"stun": 45, "impact": 31},   # Medium (impact 1-0.6925=0.3075≈31%)
+        "20": {"stun": 30, "impact": 10},   # Light
+        "15": {"stun": 25, "impact": 10},   # Flightsuit
+        "10": {"stun": 15, "impact": 0},    # Undersuit
+    }
+
+    # Build mass map from scunpacked: global.ini key -> mass
+    # Try matching with and without leading underscore
+    armor_mass_map = {}
+    for fps_item in fps_items:
+        if not fps_item.get("type", "").startswith("Char_Armor_"):
+            continue
+        si = fps_item.get("stdItem", {})
+        mass = si.get("Mass", 0) or 0
+        if mass <= 0:
+            continue
+        cn = fps_item.get("className", "").lower()
+        armor_mass_map[cn] = mass
+        armor_mass_map["_" + cn] = mass  # global.ini uses leading underscore
+
+    reduction_pattern = re.compile(r"[Rr]educci[oó]n de da[nñ]os?:\s*(\d+)%")
+    for i, line in enumerate(modified_lines):
+        if not line.startswith("item_Desc"):
+            continue
+
+        eq_pos = line.index("=")
+        key_cn = line[9:eq_pos].lower()
+        value_part = line[eq_pos + 1:].rstrip("\n").rstrip("\r")
+
+        # Must have damage reduction line
+        rm = reduction_pattern.search(value_part)
+        if not rm:
+            continue
+
+        # Already injected?
+        if "Stun:" in value_part or "Impacto:" in value_part:
+            continue
+
+        red_pct = rm.group(1)
+        tier = ARMOR_TIER_STATS.get(red_pct)
+        if not tier:
+            continue
+
+        mass = armor_mass_map.get(key_cn, 0)
+        # Fuzzy match: global.ini key might be a prefix of scunpacked className
+        if mass <= 0:
+            for acn, amass in armor_mass_map.items():
+                if acn.startswith(key_cn) or key_cn.startswith(acn):
+                    mass = amass
+                    break
+
+        parts = []
+        if mass > 0:
+            parts.append(f"{fmt_num(mass)} kg")
+        if tier["stun"] > 0:
+            parts.append(f"Reducción Stun: {tier['stun']}%")
+        if tier["impact"] > 0:
+            parts.append(f"Reducción Impacto: {tier['impact']}%")
+
+        if not parts:
+            continue
+
+        stats_line = " | ".join(parts)
+
+        last_sep = value_part.rfind("\\n\\n")
+        if last_sep >= 0:
+            new_value = value_part[:last_sep] + "\\n" + stats_line + value_part[last_sep:]
+        else:
+            new_value = value_part + "\\n" + stats_line
+
+        modified_lines[i] = line[:eq_pos + 1] + new_value + "\n"
+        armor_patched += 1
+
     # Report unmatched weapons
     unmatched = [cn for cn, val in weapons.items() if val is not None]
 
     print(f"Patched: {patched} descriptions")
     if mag_patched:
         print(f"Patched: {mag_patched} magazine descriptions (mass)")
+    if armor_patched:
+        print(f"Patched: {armor_patched} armor descriptions (mass/stun/impact)")
     if unmatched:
         print(f"Unmatched weapons (no item_Desc found): {len(unmatched)}")
         # Show first 20
