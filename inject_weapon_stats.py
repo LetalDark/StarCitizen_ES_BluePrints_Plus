@@ -1276,7 +1276,7 @@ def main():
             continue
 
         # Already injected?
-        if "Stun:" in value_part or "Impacto:" in value_part:
+        if "Stun:" in value_part and "Impacto:" in value_part:
             continue
 
         red_pct = rm.group(1)
@@ -1296,9 +1296,9 @@ def main():
         if mass > 0:
             parts.append(f"{fmt_num(mass)} kg")
         if tier["stun"] > 0:
-            parts.append(f"Reducción Stun: {tier['stun']}%")
+            parts.append(f"Stun: {tier['stun']}%")
         if tier["impact"] > 0:
-            parts.append(f"Reducción Impacto: {tier['impact']}%")
+            parts.append(f"Impacto: {tier['impact']}%")
 
         if not parts:
             continue
