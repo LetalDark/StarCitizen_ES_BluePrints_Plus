@@ -14,8 +14,10 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 6. **Marca sustancias ilegales** con `[!]` para avisar antes de transportarlas
 7. **Mejora titulos de hauling** añadiendo la ruta (origen>destino) al titulo del contrato
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
-9. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
-10. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, duplicados)
+9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Rango, Peso, Penetracion) con datos testeados in-game
+10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto) y peso de cargadores
+11. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
+12. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, nombres de armadura incorrectos)
 
 ## Fuentes
 
@@ -25,6 +27,8 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | **MrKraken / StarStrings** | Blueprints de misiones, clase/grado de componentes, mejoras de hauling y QoL | [github.com/MrKraken/StarStrings](https://github.com/MrKraken/StarStrings) |
 | **ExoAE / ScCompLangPack** | Clase/grado de componentes, blueprints, avisos de sustancias ilegales | [github.com/ExoAE/ScCompLangPack](https://github.com/ExoAE/ScCompLangPack/) |
 | **BeltaKoda / ScCompLangPackRemix** | Tracking type de misiles/bombas, prefijos compactos de componentes | [github.com/BeltaKoda/ScCompLangPackRemix](https://github.com/BeltaKoda/ScCompLangPackRemix) |
+| **scunpacked-data** | Stats reales de armas, naves y componentes (mismos datos que erkul/spviewer) | [github.com/StarCitizenWiki/scunpacked-data](https://github.com/StarCitizenWiki/scunpacked-data) |
+| **Tests in-game** | DPS, Alpha, Fire Rate medidos in-game (sin y con crafteo) | Spreadsheet comunitario |
 | **Data.p4k** | Textos oficiales EN/ES extraidos del propio juego con `extract_p4k.py` | Instalacion local de Star Citizen |
 
 ## Que incluye el global.ini final
@@ -42,6 +46,10 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 9 | Minerales | Hephaestanite → Heph + unificacion de (Raw)/(Crudo) a (Bruto) | 19 | MrKraken/ExoAE |
 | 10 | Hauling titles | Ruta origen>destino en titulos de transporte de carga | 5 | MrKraken |
 | 11 | Limpieza | Trailing spaces eliminados | 604 | BeltaKoda |
+| 12 | Stats armas FPS | DPS, Alpha, Vel, Rango, Peso, Penetracion, modos de fuego | 329 | Tests in-game + scunpacked |
+| 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game + scunpacked |
+| 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 774 | scunpacked |
+| 15 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
 
 **Total: 87.656 claves**
 
@@ -87,6 +95,44 @@ Las bombas llevan prefijo de tamaño: `B3`, `B5`, `B10`.
 
 Ejemplo: `IR Misil Marksman I` = Marksman tamaño 1, tracking infrarrojo.
 
+## Formato de stats de armas FPS
+
+Las armas muestran modos de fuego etiquetados con stats reales testeados in-game:
+
+```
+Fabricante: Kastak Arms
+Tipo de artículo: SMG
+Clase: Laser
+Tamaño de la bateria: 60
+Accesorios: optica (S1), Cañon (S1), Debajo del cañon (S1)
+[Auto] DPS: 173.3 | Alpha: 13 | 600 m/s | 1200m
+[Burst] DPS: 48.8 | Alpha: 39 | 600 m/s | 1200m
+[Full] DPS: 44.6 | Alpha: 171.6 | 600 m/s | 1200m
+2.8 kg | Dmg/Cargador: 780
+Penetracion: 0.5m
+```
+
+| Etiqueta | Significado |
+|---|---|
+| `[Auto]` | Modo automatico |
+| `[Semi]` | Modo semiautomatico |
+| `[Burst]` | Rafaga |
+| `[Beam]` | Rayo continuo |
+| `[Full]` | Disparo cargado |
+| `[Hot]` | Modo caliente (heat ramp) |
+| `[Slug]` | Proyectil unico (escopetas) |
+| `[Doble]` | Doble cañon |
+
+Valores grandes usan K: `2.1K`, `95K`, `285K`
+
+## Formato de stats de armaduras
+
+Cada pieza de armadura muestra peso, reduccion de stun y reduccion de impacto:
+
+```
+7 kg | Stun: 60% | Impacto: 35%
+```
+
 ## Herramientas incluidas
 
 ### rebuild_outputs.py — Generar global.ini
@@ -129,6 +175,24 @@ python parse_dcb.py                                 # Resumen general
 python parse_dcb.py --search loot                    # Buscar structs/records
 python parse_dcb.py --struct BlueprintRewards        # Ver propiedades de un struct
 python parse_dcb.py --dump BlueprintPoolRecord -o x.json  # Exportar a JSON
+```
+
+### inject_weapon_stats.py — Inyectar stats en descripciones
+
+Inyecta stats reales de armas FPS, cargadores y armaduras en el global.ini.
+
+```bash
+python inject_weapon_stats.py --source tested       # Datos testeados in-game (recomendado)
+python inject_weapon_stats.py --source scunpacked    # Datos de scunpacked
+python inject_weapon_stats.py --dry-run             # Preview sin escribir
+```
+
+### patch_beam_stats.py — Parchear DPS de armas beam
+
+Scunpacked no calcula DPS para armas beam. Este script descarga los JSONs individuales y parchea los agregados.
+
+```bash
+python patch_beam_stats.py                          # Parchear fps-items.json y ship-items.json
 ```
 
 ### Herramientas de verificacion
