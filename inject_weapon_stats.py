@@ -93,6 +93,36 @@ DAMAGE_LABELS = {
     "Stun": "Aturdimiento",
 }
 
+# Manual overrides for weapons with complex mechanics that scunpacked can't parse.
+# Calculated from individual JSONs in items_beam/.
+MANUAL_OVERRIDES = {
+    # Parallax: hybrid projectile(210 DPS)->beam(260 DPS)
+    "volt_rifle_energy_01": {
+        "category": "custom",
+        "stats_line": "DPS: 210-260 | Alpha: 21\\nDmg/Cargador: 1680 | Vel. Proyectil: 600 m/s\\nPenetración: 0.5m",
+    },
+    # Fresnel: sequence x3 barrels, heat ramp (RPM baja, alpha sube)
+    "volt_lmg_energy_01": {
+        "category": "energy",
+        "DpsTotal": 82.5, "AlphaTotal": 9,
+        "Dps": {"Physical": 0, "Energy": 82.5, "Distortion": 0},
+        "MaxPerMag": 1485, "Speed": 1100, "Penetration": 0.3,
+    },
+    # Prism: heat ramp, 200-450 rpm, 5.75 dmg/shot
+    "volt_shotgun_energy_01": {
+        "category": "custom",
+        "stats_line": "DPS: 19.2-43.1 | Alpha: 5.8\\nDmg/Cargador: 115 | Vel. Proyectil: 300 m/s",
+    },
+    # Tripledown: parallel x3 barrels, 12 dmg * 3 * 60 rpm / 60
+    "none_pistol_ballistic_01": {
+        "category": "ballistic",
+        "DpsTotal": 36, "AlphaTotal": 36,
+        "Dps": {"Physical": 36, "Energy": 0, "Distortion": 0},
+        "MaxPerMag": 432, "Speed": 550, "Penetration": 0.5,
+        "DamageDropDist": 10,
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -424,39 +454,74 @@ def main():
         if item.get("type") != "WeaponPersonal":
             continue
 
+        class_name = item.get("className", "").lower()
         si = item.get("stdItem", {})
         weapon = si.get("Weapon")
-        if not weapon:
-            skipped_no_data += 1
-            continue
 
-        damage = weapon.get("Damage", {})
-        dps_total = damage.get("DpsTotal") or 0
-        has_beam = "BeamData" in si
+        # Check for manual override (base className, strip skin suffixes)
+        override = None
+        for base_cn, ov in MANUAL_OVERRIDES.items():
+            if class_name == base_cn or class_name.startswith(base_cn + "_"):
+                override = ov
+                break
 
-        # Skip zero-DPS non-beam items (gadgets, tools, etc.)
-        if dps_total <= 0 and not has_beam:
-            skipped_zero_dps += 1
-            continue
+        if override:
+            category = override["category"]
+            if category == "custom":
+                # Direct stats line, no calculation needed
+                stats_block = override["stats_line"]
+            else:
+                # Apply manual override to the item's data so build_stats_block works
+                if not weapon:
+                    weapon = {"Damage": {}, "Modes": []}
+                    si["Weapon"] = weapon
+                damage = weapon.setdefault("Damage", {})
+                damage["DpsTotal"] = override["DpsTotal"]
+                damage["AlphaTotal"] = override["AlphaTotal"]
+                damage["Dps"] = override["Dps"]
+                damage["MaxPerMag"] = override.get("MaxPerMag", 0)
+                ammo = si.setdefault("Ammunition", {})
+                if "Speed" in override:
+                    ammo["Speed"] = override["Speed"]
+                if "Penetration" in override:
+                    ammo["MaxPenetrationThickness"] = override["Penetration"]
+                if "DamageDropDist" in override:
+                    ammo["DamageDropMinDistance"] = {"Physical": override["DamageDropDist"]}
+                if "BeamData" in override:
+                    si["BeamData"] = override["BeamData"]
+                stats_block = build_stats_block(item, category)
+        else:
+            if not weapon:
+                skipped_no_data += 1
+                continue
 
-        # Beam weapons with DPS=0 and no useful beam data — skip
-        if has_beam and dps_total <= 0:
-            beam = si.get("BeamData", {})
-            if not beam.get("FullDamageRange") and not beam.get("ZeroDamageRange"):
+            damage = weapon.get("Damage", {})
+            dps_total = damage.get("DpsTotal") or 0
+            has_beam = "BeamData" in si
+
+            # Skip zero-DPS non-beam items (gadgets, tools, etc.)
+            if dps_total <= 0 and not has_beam:
                 skipped_zero_dps += 1
                 continue
 
-        category = classify_weapon(item)
-        if category is None:
-            skipped_zero_dps += 1
-            continue
+            # Beam weapons with DPS=0 and no useful beam data — skip
+            if has_beam and dps_total <= 0:
+                beam = si.get("BeamData", {})
+                if not beam.get("FullDamageRange") and not beam.get("ZeroDamageRange"):
+                    skipped_zero_dps += 1
+                    continue
 
-        stats_block = build_stats_block(item, category)
+            category = classify_weapon(item)
+            if category is None:
+                skipped_zero_dps += 1
+                continue
+
+            stats_block = build_stats_block(item, category)
+
         if stats_block is None:
             skipped_penetration += 1
             continue
 
-        class_name = item["className"].lower()
         weapons[class_name] = (item, category, stats_block)
 
     print(f"Weapons with stats: {len(weapons)}")
