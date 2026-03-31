@@ -716,8 +716,9 @@ def load_tested_weapons(version_dir, fps_items):
 
                 # Check if it looks like a sub-header row (all 1's or empty DPS)
                 dps_val = row[19].strip() if len(row) > 19 else ''
+                dps_burst_val = row[20].strip() if len(row) > 20 else ''
                 fire_mode = row[7].strip() if len(row) > 7 else ''
-                if not fire_mode or dps_val in ('', '1'):
+                if not fire_mode or (dps_val in ('', '1') and dps_burst_val in ('', '1')):
                     # Sub-header or separator row
                     if current_name and current_rows:
                         raw_weapons.append((current_name, current_rows))
@@ -756,11 +757,14 @@ def load_tested_weapons(version_dir, fps_items):
             try:
                 dps_s = _parse_csv_float(row[19]) if len(row) > 19 and row[19].strip() else 0
             except ValueError:
-                continue
+                dps_s = 0
             try:
                 dps_b = _parse_csv_float(row[20]) if len(row) > 20 and row[20].strip() else 0
             except ValueError:
                 dps_b = 0
+            # Fallback: if sustained is 0 but burst exists, use burst
+            if dps_s <= 0 and dps_b > 0:
+                dps_s = dps_b
             try:
                 a = _parse_csv_float(row[16]) if len(row) > 16 and row[16].strip() else 0
             except ValueError:
@@ -1140,6 +1144,8 @@ def main():
     patched = 0
     not_found = []
     modified_lines = list(lines)
+    # Keep immutable copy for skin lookups (weapons gets consumed)
+    base_weapons = dict(weapons)
 
     for i, line in enumerate(lines):
         m = desc_pattern.match(line)
@@ -1147,10 +1153,43 @@ def main():
             continue
 
         key_classname = m.group(1).lower()
-        if key_classname not in weapons:
+        # Strip ,P suffix and try exact match first
+        key_clean = re.sub(r',p$', '', key_classname, flags=re.IGNORECASE)
+        # Helper: get from weapons OR base_weapons (never consumed)
+        def _get_weapon(k):
+            v = weapons.get(k)
+            if v is not None:
+                return v
+            return base_weapons.get(k)
+
+        match = _get_weapon(key_classname) or _get_weapon(key_clean)
+        # Fuzzy: strip known skin suffixes and try base match
+        if not match:
+            key_base = re.sub(
+                r'_(iae\d+|blue_gold_?\d*|blue_white\d*|shin\d*|cen\d*|imp\d*|iron|mat\d*|,p)$',
+                '', key_clean, flags=re.IGNORECASE)
+            match = _get_weapon(key_base)
+            if not match:
+                for suffix in ['_01', '_02', '_03', '']:
+                    match = _get_weapon(key_base + suffix)
+                    if match:
+                        break
+        # Fuzzy: try if any base weapon className is a prefix (or vice versa)
+        if not match:
+            for base_cn, val in base_weapons.items():
+                if val is None:
+                    continue
+                if key_clean.startswith(base_cn + "_") or key_clean.startswith(base_cn):
+                    match = val
+                    break
+                # Reverse: base weapon is more specific (e.g., _civilian variant)
+                if base_cn.startswith(key_base + "_") or base_cn.startswith(key_base):
+                    match = val
+                    break
+        if not match:
             continue
 
-        item, category, stats_block = weapons[key_classname]
+        item, category, stats_block = match
 
         # Extract key=value
         eq_pos = line.index("=")
@@ -1174,8 +1213,9 @@ def main():
             modified_lines[i] = new_line
             patched += 1
 
-        # Mark as found
-        weapons[key_classname] = None  # consumed
+        # Mark as found (don't consume — skins share base)
+        if key_classname in weapons:
+            weapons[key_classname] = None
 
     # --- Patch magazine descriptions with mass ---
     mag_patched = 0
@@ -1285,10 +1325,14 @@ def main():
             continue
 
         mass = armor_mass_map.get(key_cn, 0)
-        # Fuzzy match: global.ini key might be a prefix of scunpacked className
+        # Fuzzy match: normalize both by removing numbers and comparing word sets
         if mass <= 0:
+            # Strip leading underscore, numbers, and split into word set
+            key_words = set(re.sub(r'[\d_]+', ' ', key_cn.lstrip('_')).split())
             for acn, amass in armor_mass_map.items():
-                if acn.startswith(key_cn) or key_cn.startswith(acn):
+                acn_words = set(re.sub(r'[\d_]+', ' ', acn.lstrip('_')).split())
+                # Match if all significant words from the key are in the scunpacked name
+                if key_words and key_words.issubset(acn_words):
                     mass = amass
                     break
 
