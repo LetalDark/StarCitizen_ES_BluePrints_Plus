@@ -1,5 +1,57 @@
 # Changelog
 
+## v1.3.0 — 2026-03-31
+
+**Stats reales de armas FPS, cargadores y armaduras inyectados en las descripciones del juego.**
+
+**Fuentes de datos:**
+- scunpacked-data (StarCitizenWiki/scunpacked-data) — mismos datos que erkul/spviewer
+- Spreadsheet comunitario con tests in-game (sin y con crafteo)
+
+**Armas FPS (329 descripciones):**
+- DPS, Alpha, Velocidad, Rango, Dmg/Cargador, Penetración, Caída de daño, Peso
+- Modos de fuego etiquetados: [Auto] [Semi] [Burst] [Beam] [Full] [Hot] [Slug] [Doble]
+- Armas con heat ramp: Fresnel, Pulse, Prism (modo frío + caliente)
+- Armas con carga: Scourge, Zenith, Karna, Custodian, Devastator, Salvo, Arrowhead
+- Armas con modos seleccionables: P4-AR, R97, Scalpel, Arclight, Gallant, P8-SC
+- Daño combinado: Killshot (Físico + Energía)
+- Valores K para números grandes (2.1K, 95K, 285K)
+- Fuente seleccionable: `--source scunpacked` o `--source tested`
+
+**Cargadores (42 descripciones):**
+- Peso añadido: "Capacidad: 45 | 0.6 kg"
+
+**Armaduras (774 descripciones):**
+- Peso, Reducción Stun y Reducción Impacto por pieza
+- Formato: "7 kg | Stun: 60% | Impacto: 35%"
+
+**Correcciones:**
+- 10 nombres de armadura corregidos (pieza equivocada en traducción)
+  - Calico Tactical/Desert: core decía "Piernas" → "Pechera"
+  - Aril x5 variantes: legs decía "Brazos" → "Piernas"
+  - ADP-mk4 Justified: helmet/legs decía "Pechera" → "Casco"/"Piernas"
+  - Horizon Crusader: helmet decía "Pechera" → "Casco"
+- Clase energía simplificada: "energía (Laser)" → "Laser"
+- Datos beam parcheados (Quartz 225 DPS, Ripper 165, Parallax 210-260)
+
+**Scripts nuevos:**
+- `inject_weapon_stats.py` — inyecta stats en global.ini
+- `patch_beam_stats.py` — parchea DPS de armas beam en scunpacked
+
+**Uso:**
+```bash
+python inject_weapon_stats.py --source tested    # datos testeados in-game
+python inject_weapon_stats.py --source scunpacked # datos de scunpacked
+python inject_weapon_stats.py --dry-run           # preview sin escribir
+```
+
+**Estadísticas:**
+- Líneas en global.ini: 87.656
+- Armas FPS parcheadas: 329
+- Cargadores parcheados: 42
+- Armaduras parcheadas: 774
+- Nombres corregidos: 10
+
 ## v1.2.3 — 2026-03-30
 
 **Cambios:**
