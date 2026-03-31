@@ -150,10 +150,13 @@ Armas sin datos: Parallax, Fresnel (híbridas proyectil→beam, scunpacked no ti
 ### inject_weapon_stats.py — Inyectar stats en descripciones
 
 ```bash
-python inject_weapon_stats.py                       # Inyectar stats en global.ini
+python inject_weapon_stats.py --source tested       # Datos testeados in-game (recomendado)
+python inject_weapon_stats.py --source scunpacked    # Datos de scunpacked
 python inject_weapon_stats.py --dry-run             # Preview sin escribir
 python inject_weapon_stats.py --version 4.7.0-LIVE_11545720  # Versión específica
 ```
+
+Inyecta: armas FPS (329), cargadores (42), armaduras (774).
 
 Formato de stats inyectados — ver guía: `.claude/guides/weapon-stats-format.md`
 
