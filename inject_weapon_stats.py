@@ -630,9 +630,15 @@ def build_stats_block_tested(item, category):
             parts.append(f"{fmt_num(ammo_range)}m")
         lines.append(" | ".join(parts))
 
-    # Shared stats: Dmg/Cargador
+    # Shared stats: Mass | Dmg/Cargador
+    mass = si.get("Mass", 0) or 0
+    mass_parts = []
+    if mass > 0:
+        mass_parts.append(f"{fmt_num(mass)} kg")
     if max_per_mag > 0:
-        lines.append(f"Dmg/Cargador: {fmt_num(max_per_mag)}")
+        mass_parts.append(f"Dmg/Cargador: {fmt_num(max_per_mag)}")
+    if mass_parts:
+        lines.append(" | ".join(mass_parts))
 
     # Shared stats: Penetración | Caída daño
     extras3 = []
@@ -722,6 +728,7 @@ def load_tested_weapons(version_dir, fps_items):
     for weapon_name, rows in raw_weapons:
         # Parse all modes for this weapon
         parsed_modes = []
+        weapon_mass = 0  # mass from first row, propagate to sub-rows
         for row in rows:
             fm = row[7].strip() if len(row) > 7 else ''
             if not fm:
@@ -743,7 +750,10 @@ def load_tested_weapons(version_dir, fps_items):
                 pel = 1
             m_speed = _parse_csv_float(row[8]) if len(row) > 8 else 0
             m_range = _parse_csv_float(row[10]) if len(row) > 10 else 0
-            parsed_modes.append({"row": row, "mode": fm, "dps_sus": dps_s, "dps_burst": dps_b, "alpha": a, "pellets": pel, "speed": m_speed, "range": m_range})
+            m_mass = _parse_csv_float(row[5]) if len(row) > 5 and row[5].strip() else 0
+            if m_mass > 0:
+                weapon_mass = m_mass  # first row sets the mass
+            parsed_modes.append({"row": row, "mode": fm, "dps_sus": dps_s, "dps_burst": dps_b, "alpha": a, "pellets": pel, "speed": m_speed, "range": m_range, "mass": weapon_mass})
 
         if not parsed_modes:
             skipped_zero_dps += 1
@@ -882,11 +892,15 @@ def load_tested_weapons(version_dir, fps_items):
                 deduped.append(m)
         all_modes = deduped
 
+        # Get mass from primary mode
+        mass = primary.get("mass", 0) or 0
+
         # Build item dict in scunpacked-compatible format
         item = {
             "className": class_name,
             "_all_modes": all_modes,
             "stdItem": {
+                "Mass": mass,
                 "Weapon": {
                     "Damage": {
                         "DpsTotal": dps_sustained,
