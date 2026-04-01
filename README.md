@@ -1,4 +1,4 @@
-# Star Citizen - Traduccion ES + BluePrints
+# Star Citizen - ES Plus
 
 Traduccion al español de Star Citizen que combina multiples fuentes para ofrecer la experiencia mas completa posible en español.
 

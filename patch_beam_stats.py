@@ -67,7 +67,7 @@ def download_item_json(classname, cache_dir):
     url = f"{GITHUB_API}/{classname}.json"
     req = urllib.request.Request(url, headers={
         "Accept": "application/vnd.github.v3.raw",
-        "User-Agent": "StarCitizen-ES-BluePrints"
+        "User-Agent": "StarCitizen-ES-Plus"
     })
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
