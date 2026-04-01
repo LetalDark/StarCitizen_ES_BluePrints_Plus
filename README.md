@@ -14,8 +14,8 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 6. **Marca sustancias ilegales** con `[!]` para avisar antes de transportarlas
 7. **Mejora titulos de hauling** añadiendo la ruta (origen>destino) al titulo del contrato
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
-9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Rango, Peso, Caida de daño) con datos testeados in-game
-10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto) y peso de cargadores
+9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Peso, Caida de daño) con datos testeados in-game
+10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto), peso de cargadores, mochilas, ropa, accesorios y mas (1,996 items en total)
 11. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
 12. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, nombres de armadura incorrectos)
 
@@ -45,10 +45,15 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 9 | Minerales | Hephaestanite → Heph + unificacion de (Raw)/(Crudo) a (Bruto) | 19 | MrKraken/ExoAE |
 | 10 | Hauling titles | Ruta origen>destino en titulos de transporte de carga | 5 | MrKraken |
 | 11 | Limpieza | Trailing spaces eliminados | 604 | BeltaKoda |
-| 12 | Stats armas FPS | DPS, Alpha, Vel, Rango, Peso, Caida de daño, modos de fuego | 328 | Tests in-game + Data.p4k |
-| 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
+| 12 | Stats armas FPS | DPS, Alpha, Vel, Peso, Caida de daño, modos de fuego | 295 | Tests in-game + Data.p4k |
+| 13 | Stats cargadores | Peso del cargador | 47 | Tests in-game |
 | 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 774 | Tests in-game + Data.p4k |
-| 15 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
+| 15 | Stats ropa | Peso de camisetas, chaquetas, pantalones, gorros, calzado, guantes | 615 | Tests in-game |
+| 16 | Stats mochilas | Peso 6 kg | 102 | Tests in-game |
+| 17 | Stats items FPS | Peso de granadas, multitools, gadgets, flares | 111 | Tests in-game |
+| 18 | Stats accesorios arma | Stats de miras, cañones, suppressors | 48 | Tests in-game |
+| 19 | Stats accesorios multitool | Peso de cutter, mining, salvage, healing, tractor beam | 5 | Tests in-game |
+| 20 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
 
 **Total: 87.656 claves**
 
@@ -104,10 +109,12 @@ Tipo de artículo: SMG
 Clase: Laser
 Tamaño de la bateria: 60
 Accesorios: optica (S1), Cañon (S1), Debajo del cañon (S1)
-[Auto] DPS: 173.3 | Alpha: 13 | 600 m/s | 1200m
-[Burst] DPS: 48.8 | Alpha: 39 | 600 m/s | 1200m
-[Full] DPS: 44.6 | Alpha: 171.6 | 600 m/s | 1200m
-2.8 kg | Dmg/Cargador: 780
+[Auto] DPS: 173.3 | Alpha: 13 | 600 m/s
+[Burst] DPS: 48.8 | Alpha: 39 | 600 m/s
+[Full] DPS: 44.6 | Alpha: 171.6 | 600 m/s
+Dmg/Cargador: 780
+Cargado: 3.18 kg | Descargado: 2.75 kg
+[Red. daño] 100% 15m | 73% 77m | 0% 950m
 ```
 
 | Etiqueta | Significado |
@@ -125,10 +132,21 @@ Valores grandes usan K: `2.1K`, `95K`, `285K`
 
 ## Formato de stats de armaduras
 
-Cada pieza de armadura muestra peso, reduccion de stun y reduccion de impacto:
+Cada pieza de armadura muestra peso, reduccion de stun y reduccion de impacto justo despues de los metadatos:
 
 ```
-7 kg | Stun: 60% | Impacto: 35%
+Mochilas: Medianas, Ligeras
+5 kg | Stun: 45% | Impacto: 31%
+
+Fuerza y velocidad se combinan...
+```
+
+Las armaduras con descripcion compartida (sin pieza especifica) muestran tabla de pesos:
+
+```
+Stun: 45% | Impacto: 31%
+*Descripción compartida entre piezas
+Casco: 5 | Pechera: 5 | Brazos: 4 | Piernas: 6 kg
 ```
 
 ## Herramientas incluidas
@@ -177,12 +195,14 @@ python parse_dcb.py --dump BlueprintPoolRecord -o x.json  # Exportar a JSON
 
 ### inject_weapon_stats.py — Inyectar stats en descripciones
 
-Inyecta stats reales de armas FPS, cargadores y armaduras en el global.ini.
+Inyecta stats reales en el global.ini: armas FPS, armaduras, cargadores, mochilas, ropa, accesorios y mas.
 
 ```bash
 python inject_weapon_stats.py --source tested       # Datos testeados in-game (recomendado)
 python inject_weapon_stats.py --source game           # Pendiente: desde archivos del juego
 python inject_weapon_stats.py --dry-run             # Preview sin escribir
+python inject_weapon_stats.py --output test.ini     # Escribir a otro fichero
+python inject_weapon_stats.py --verify              # 6 checks de calidad + idempotencia
 ```
 
 ### patch_beam_stats.py — Parchear DPS de armas beam (fuente alternativa)
