@@ -13,5 +13,8 @@ CLAUDE.md
 *.bak
 __pycache__/
 
+# Loadout calculator (se genera con export_loadout_data.py)
+loadout-calculator.json
+
 # DCB y JSONs de datamining (demasiado grandes)
 Game2.dcb
