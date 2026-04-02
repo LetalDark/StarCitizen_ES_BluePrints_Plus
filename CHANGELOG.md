@@ -1,20 +1,5 @@
 # Changelog
 
-## v1.4.3 — 2026-04-02
-
-**Nuevo: Calculadora de Loadout FPS**
-
-**export_loadout_data.py:**
-- Genera `loadout-calculator.json` con datos de masa de 207 items FPS
-- 46 armas, 55 cargadores, 41 armaduras, 7 ropa, 24 consumibles, 11 granadas, 10 melee, 6 gadgets, 7 utilities
-- Fórmulas de velocidad verificadas: Speed Factor, Sprint/Run/ADS Speed, Sprint Duration
-- Incluye buff Hypertrophic + Energizing
-- Flag --verify con 8 checks de calidad
-
-**Estadísticas:**
-- Líneas en global.ini: 87,656 (sin cambios)
-- Items en loadout-calculator.json: 207
-
 ## v1.4.2 — 2026-04-01
 
 **Prefijos [CLS|tam|grado], eliminación de líneas redundantes y Disto/masa en Coolers.**
@@ -22,8 +7,7 @@
 **Nuevo formato de prefijo en nombres de componentes:**
 - Antes: `[Civ-2B] Radiance` → Ahora: `[CIV|2|B] Radiance`
 - 383 componentes con prefijo (antes 191)
-- Fallback DCB para componentes sin datos en ExoAE (890J, Idris, Reclaimer)
-- Bespoke/Hecho a medida = Grade A (confirmado DCB/SPViewer/Erkul)
+- Bespoke/Hecho a medida = Grade A (confirmado en datos del juego)
 
 **Eliminadas líneas redundantes de descripciones:**
 - Tamaño, Grado y Clase eliminados de 377 descripciones de componentes
@@ -41,16 +25,12 @@
 
 ## v1.4.1 — 2026-04-01
 
-**Stats de componentes de nave extraídos del Game2.dcb — 339 componentes parcheados.**
+**Stats de componentes de nave — 339 componentes parcheados.**
 
 **Nuevo: componentes de nave (339 descripciones):**
 - 6 tipos: Power Plant (78), Quantum Drive (58), Jump Drive (8), Shield (68), Cooler (75), Radar (66)
-- Stats extraídos del Game2.dcb, verificados contra SPViewer y Erkul
+- Stats extraídos de los datos del juego, verificados contra SPViewer y Erkul
 - Quantum Drive incluye rango de eficiencia min-max según tanque QT de la nave
-
-**Nuevo: script extract_ship_components.py:**
-- Extrae stats de los 6 tipos de componente del DCB
-- Integrado en inject_weapon_stats.py con `--source dcb-components`
 
 **Estadísticas:**
 - Líneas en global.ini: 87,656
@@ -60,22 +40,12 @@
 
 ## v1.4.0 — 2026-04-01
 
-**Stats de armas de nave extraídos del Game2.dcb — 125 armas parcheadas.**
+**Stats de armas de nave — 125 armas parcheadas.**
 
 **Nuevo: armas de nave (125 descripciones):**
-- Stats extraídos directamente de los archivos del juego (Game2.dcb), no de fuentes externas
+- Stats extraídos directamente de los archivos del juego, no de fuentes externas
 - 19 tipos de arma cubiertos: LaserRepeater, LaserCannon, LaserGatling, NeutronRepeater, NeutronCannon, PlasmaCannon, BallisticGatling, BallisticRepeater, BallisticCannon, BallisticScatterGun, LaserScattergun, DistortionRepeater, DistortionCannon, DistortionScatterGun, TachyonCannon, MassDriver, MassDriverCannon, ScatterGun
 - Datos verificados contra SPViewer: DPS, Alpha, RPM, velocidad, rango, penetración, dispersión, capacitor/munición, masa, HP, firma EM, consumo energía, AoE
-
-**Nuevo: parser del DCB arreglado (parse_dcb.py):**
-- Fix: clases inline (DT_CLASS) no avanzaban posición — todos los campos posteriores leían basura
-- Fix: arrays de StrongPointer no se resolvían — componentes de entidades salían como punteros
-- Fix: sin límite en arrays — MemoryError con counts grandes
-- Ahora puede leer cualquier entidad completa del DCB (armas, componentes, ammo, etc.)
-
-**Nuevo: script extract_ship_weapons.py:**
-- Extrae stats de todas las armas de nave del DCB automáticamente
-- Integrado en inject_weapon_stats.py con `--source dcb`
 
 **Estadísticas:**
 - Líneas en global.ini: 87,656
@@ -106,13 +76,9 @@
 - Fix: peso de accesorios multitool después de "Clase:", no antes de "Fabricante:"
 - Fix: accesorios multitool ya no heredan peso 2.32 kg de la multitool base
 - Fix: cargadores limpiados — stats de arma heredados eliminados de 39 descripciones
-- Fix: matching mejorado de magazines (fuzzy suffix swap, mapeo via p4k names)
-- Fix: matching mejorado de attachments (FieldLite, FarSight skins via word match y _base suffix)
+- Fix: matching mejorado de magazines (fuzzy suffix swap, mapeo via nombres del juego)
+- Fix: matching mejorado de attachments (FieldLite, FarSight skins via word match)
 - Fix: armaduras con `Item_Desc` (I mayúscula) ahora se procesan
-
-**Script (`inject_weapon_stats.py`):**
-- Nuevo flag `--output` para escribir a otro fichero sin tocar el original
-- Nuevo flag `--verify` con 6 checks: orphans, duplicados, doble kg, texto perdido, idempotencia, claves p4k
 - Limpieza automática de marcadores X-prefix de MrKraken
 
 **Estadísticas:**
@@ -135,7 +101,6 @@
 - Armas con modos seleccionables: P4-AR, R97, Scalpel, Arclight, Gallant, P8-SC
 - Daño combinado: Killshot (Físico + Energía)
 - Valores K para números grandes (2.1K, 95K, 285K)
-- Fuente: `--source tested` (default). Pendiente: `--source game` desde archivos del juego
 
 **Cargadores (42 descripciones):**
 - Peso añadido: "Capacidad: 45 | 0.6 kg"
@@ -153,21 +118,9 @@
 - Clase energía simplificada: "energía (Laser)" → "Laser"
 - Datos beam parcheados (Quartz 225 DPS, Ripper 165, Parallax 210-260)
 
-**Scripts nuevos:**
-- `inject_weapon_stats.py` — inyecta stats en global.ini
-- `patch_beam_stats.py` — parchea DPS de armas beam (fuente alternativa)
-
-**Uso:**
-```bash
-python inject_weapon_stats.py --source tested    # datos testeados in-game
-python inject_weapon_stats.py --source game       # pendiente: desde archivos del juego
-python inject_weapon_stats.py --dry-run           # preview sin escribir
-```
-
 **Estadísticas:**
 - Líneas en global.ini: 87.656
 - Armas FPS parcheadas: 328
-- Sin dependencia de scunpacked (solo Excel + Data.p4k)
 - Cargadores parcheados: 42
 - Armaduras parcheadas: 774
 - Nombres corregidos: 10
@@ -193,8 +146,6 @@ python inject_weapon_stats.py --dry-run           # preview sin escribir
 - Añadido prefijo de tamaño (B3/B5/B10) a 6 bombas (nombre completo + MFD)
 - Eliminados trailing spaces en 604 claves (limpieza de datos de CIG)
 - Renombrada carpeta de version: hotfix → LIVE (mismo build 11545720)
-- Scripts y herramientas ahora publicos en el repositorio
-- rebuild_outputs.py actualizado con las 11 capas completas
 
 **Estadisticas:**
 - Lineas en global.ini: 87.656
@@ -227,25 +178,23 @@ python inject_weapon_stats.py --dry-run           # preview sin escribir
 - Lineas en global.ini: 87.656
 - Blueprints traducidos: 232
 - Componentes con clase/grado: 368
-- Pools cubiertos: 45/45 del DCB
+- Pools cubiertos: 45/45
 
 ## v1.1.3 — 2026-03-28
 
 **Cambios:**
 - Eliminados 4 GUIDs nulos (00000000-...) que aparecían como blueprint en misiones InterSec Patrol y Hockrow P2M3
 - Eliminada clave LOC_UNINITIALIZED (no es una misión real)
-- Añadidos 3 pools de blueprints que faltaban (verificados contra Game2.dcb):
+- Añadidos 3 pools de blueprints que faltaban:
   - Hockrow FacilityDelve P3 Repeat: Zenith Darkwave, Fresnel Molten, Geist ASD Edition (7 bps)
   - Headhunters EliminateSpecific PAF: P8-AR Rifle, Palatino + Moonfall (10 bps)
   - Rayari Irradiated Pearls + Storm (x5 claves): Prism Laser Shotgun, Stirling, Siebe (7 bps)
-- Nueva herramienta parse_dcb.py para datamining del Game2.dcb (DataCore Binary)
-- Nueva herramienta explore_p4k.py para explorar contenido del Data.p4k
 
 **Estadísticas:**
 - Líneas en global.ini: 87.593
 - Líneas en global_plus.ini: 87.656
 - Blueprints traducidos: 232
-- Pools cubiertos: 45/45 del DCB (antes 42/45)
+- Pools cubiertos: 45/45 (antes 42/45)
 
 ## v1.1.2 — 2026-03-28
 
@@ -274,7 +223,6 @@ python inject_weapon_stats.py --dry-run           # preview sin escribir
 - Data.p4k: SC Alpha 4.7.0-hotfix (build 11545720, 2026-03-28)
 
 **Cambios:**
-- Nueva herramienta `extract_p4k.py` para extraer global.ini directamente del Data.p4k del juego
 - Nueva estructura versionada: `versions/{version}/sources|diff|output`
 - Nueva variante `global_plus.ini`: incluye traducciones del p4k para claves que faltaban
 - 65 claves traducidas desde el p4k (diálogos de carreras, tutorial, UI torretas, descripciones, opciones)

@@ -16,8 +16,8 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
 9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Peso, Caida de daño) con datos testeados in-game
 10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto), peso de cargadores, mochilas, ropa, accesorios y mas (1,996 items en total)
-11. **Inyecta stats de armas de nave** (DPS, Alpha, RPM, Velocidad, Rango, Penetracion, Capacitor, Masa, HP, EM, AoE) extraidos directamente del Game2.dcb (125 armas)
-12. **Inyecta stats de componentes de nave** (339 componentes): Power Plants, Quantum Drives, Jump Drives, Shields, Coolers y Radars con datos del Game2.dcb
+11. **Inyecta stats de armas de nave** (DPS, Alpha, RPM, Velocidad, Rango, Penetracion, Capacitor, Masa, HP, EM, AoE) extraidos directamente de los datos del juego (125 armas)
+12. **Inyecta stats de componentes de nave** (339 componentes): Power Plants, Quantum Drives, Jump Drives, Shields, Coolers y Radars con datos del juego
 13. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
 14. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, nombres de armadura incorrectos)
 
@@ -30,7 +30,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | **ExoAE / ScCompLangPack** | Clase/grado de componentes, blueprints, avisos de sustancias ilegales | [github.com/ExoAE/ScCompLangPack](https://github.com/ExoAE/ScCompLangPack/) |
 | **BeltaKoda / ScCompLangPackRemix** | Tracking type de misiles/bombas, prefijos compactos de componentes | [github.com/BeltaKoda/ScCompLangPackRemix](https://github.com/BeltaKoda/ScCompLangPackRemix) |
 | **Tests in-game** | DPS, Alpha, Fire Rate medidos in-game (sin y con crafteo) | Spreadsheet comunitario |
-| **Data.p4k** | Textos oficiales EN/ES extraidos del propio juego con `extract_p4k.py` | Instalacion local de Star Citizen |
+| **Data.p4k** | Textos oficiales EN/ES extraidos del propio juego | Instalacion local de Star Citizen |
 
 ## Que incluye el global.ini final
 
@@ -40,7 +40,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 2 | Blueprints misiones | Planos posibles en misiones, traducidos al ES + correcciones | 232 | MrKraken + nuestras |
 | 3 | Traducciones p4k | Claves que faltan en Thord82, traducidas del ingles oficial | 874 | Data.p4k CIG |
 | 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 216 | ExoAE |
-| 5 | Componentes clase/grado | Prefijo `[MIL|2|A]`, `[CIV|1|C]`, etc. en componentes de naves | 383 | ExoAE + DCB |
+| 5 | Componentes clase/grado | Prefijo `[MIL|2|A]`, `[CIV|1|C]`, etc. en componentes de naves | 383 | ExoAE + datos del juego |
 | 6 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas | 115 | BeltaKoda |
 | 7 | Sustancias ilegales | Marca `[!]` en drogas (WiDoW, SLAM, Maze, etc.) | 8 | ExoAE |
 | 8 | HUD mining | Abreviaturas para evitar solapamiento (Inest:, Res:) | 2 | MrKraken/ExoAE |
@@ -56,9 +56,8 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 18 | Stats accesorios arma | Stats de miras, cañones, suppressors | 48 | Tests in-game |
 | 19 | Stats accesorios multitool | Peso de cutter, mining, salvage, healing, tractor beam | 5 | Tests in-game |
 | 20 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
-| 21 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 125 | Game2.dcb |
-| 22 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 339 | Game2.dcb |
-| 23 | Loadout Calculator JSON | Masa de 207 items + formulas de velocidad (Sprint, Run, ADS, Duration) | 207 | Tests in-game |
+| 21 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 125 | Datos del juego |
+| 22 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 339 | Datos del juego |
 
 **Total: 87.656 claves**
 
@@ -158,7 +157,7 @@ Casco: 5 | Pechera: 5 | Brazos: 4 | Piernas: 6 kg
 
 ## Formato de stats de armas de nave
 
-Stats extraidos directamente del Game2.dcb del juego. 6 lineas agrupadas por tipo:
+Stats extraidos directamente de los datos del juego. 6 lineas agrupadas por tipo:
 
 ```
 DPS: 817.9 | Alpha: 65.43 | 750 RPM
@@ -181,7 +180,7 @@ Armas balisticas muestran `Mun: X` en vez de capacitor. Armas de distorsion mues
 
 ## Formato de stats de componentes de nave
 
-Stats extraidos del Game2.dcb. Cada tipo de componente muestra stats relevantes:
+Stats extraidos de los datos del juego. Cada tipo de componente muestra stats relevantes:
 
 **Power Plant:**
 ```
@@ -232,105 +231,6 @@ Disto: 1.2K | Disipa: 240/s
 ```
 
 La eficiencia del Quantum Drive depende del tanque cuantico de la nave. Se muestra el rango min-max para todas las naves compatibles con ese tamaño de QDrive.
-
-## Herramientas incluidas
-
-### rebuild_outputs.py — Generar global.ini
-
-Regenera el `global.ini` completo desde cero aplicando las 11 capas.
-
-```bash
-python rebuild_outputs.py
-```
-
-### extract_p4k.py — Extraer localizacion del Data.p4k
-
-Extrae el `global.ini` de cualquier idioma directamente del `Data.p4k` de tu instalacion.
-
-```bash
-pip install zstandard
-python extract_p4k.py --list                        # Ver idiomas disponibles
-python extract_p4k.py                               # Extraer ingles
-python extract_p4k.py --lang spanish_(spain)         # Extraer español oficial de CIG
-python extract_p4k.py -o archivo.ini                 # Elegir nombre de salida
-python extract_p4k.py --sc-path "D:/Games/SC/LIVE"   # Ruta manual
-```
-
-### explore_p4k.py — Explorar contenido del Data.p4k
-
-Navega y extrae archivos individuales del Data.p4k.
-
-```bash
-python explore_p4k.py --stats                       # Carpetas de primer nivel
-python explore_p4k.py --search blueprint             # Buscar archivos por nombre
-python explore_p4k.py --extract "Data\Game2.dcb" -o Game2.dcb  # Extraer archivo
-```
-
-### parse_dcb.py — Datamining del Game2.dcb
-
-Explora y exporta datos del DataForge Binary (base de datos central de gameplay).
-
-```bash
-python parse_dcb.py                                 # Resumen general
-python parse_dcb.py --search loot                    # Buscar structs/records
-python parse_dcb.py --struct BlueprintRewards        # Ver propiedades de un struct
-python parse_dcb.py --dump BlueprintPoolRecord -o x.json  # Exportar a JSON
-```
-
-### inject_weapon_stats.py — Inyectar stats en descripciones
-
-Inyecta stats reales en el global.ini: armas FPS, armaduras, cargadores, mochilas, ropa, accesorios y mas.
-
-```bash
-python inject_weapon_stats.py --source tested       # Armas FPS (datos testeados in-game)
-python inject_weapon_stats.py --source dcb          # Armas de nave (datos del Game2.dcb)
-python inject_weapon_stats.py --source dcb-components # Componentes de nave (datos del Game2.dcb)
-python inject_weapon_stats.py --dry-run             # Preview sin escribir
-python inject_weapon_stats.py --output test.ini     # Escribir a otro fichero
-python inject_weapon_stats.py --verify              # 6 checks de calidad + idempotencia
-```
-
-### extract_ship_weapons.py — Extraer stats de armas de nave
-
-Extrae stats de todas las armas de nave del Game2.dcb (125 armas, 19 tipos).
-
-```bash
-python extract_ship_weapons.py                      # Tabla resumen
-python extract_ship_weapons.py --dry-run            # Preview de stats formateados
-python extract_ship_weapons.py --json -o out.json   # Exportar datos completos
-```
-
-### extract_ship_components.py — Extraer stats de componentes de nave
-
-Extrae stats de 6 tipos de componente del Game2.dcb (339 componentes).
-
-```bash
-python extract_ship_components.py                      # Tabla resumen
-python extract_ship_components.py --dry-run            # Preview de stats formateados
-python extract_ship_components.py --type Shield        # Filtrar por tipo
-python extract_ship_components.py --json -o out.json   # Exportar datos completos
-```
-
-### export_loadout_data.py — Generar JSON para calculadora de loadout
-
-Genera `loadout-calculator.json` con masa de todos los items FPS y formulas de velocidad.
-
-```bash
-python export_loadout_data.py                      # Genera el JSON
-python export_loadout_data.py --verify             # Genera + 8 checks de calidad
-python export_loadout_data.py --dry-run            # Preview sin escribir
-python export_loadout_data.py -o otro.json         # Ruta personalizada
-```
-
-### Herramientas de verificacion
-
-```bash
-python audit_diffs.py                               # Auditar diffs: GUIDs nulos, duplicados, tags rotos
-python fix_diffs.py                                  # Corregir diffs automaticamente
-python verify_blueprints.py                          # Verificar blueprints contra DCB
-python compare_coverage.py                           # Comparar cobertura MrKraken vs DCB pool por pool
-python extract_mission_blueprints.py                 # Extraer cadena mision→pool→blueprint del DCB
-```
 
 ## Version actual
 
