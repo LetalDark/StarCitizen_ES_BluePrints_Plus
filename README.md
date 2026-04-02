@@ -58,6 +58,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 20 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
 | 21 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 125 | Game2.dcb |
 | 22 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 339 | Game2.dcb |
+| 23 | Loadout Calculator JSON | Masa de 207 items + formulas de velocidad (Sprint, Run, ADS, Duration) | 207 | Tests in-game |
 
 **Total: 87.656 claves**
 
@@ -308,6 +309,17 @@ python extract_ship_components.py                      # Tabla resumen
 python extract_ship_components.py --dry-run            # Preview de stats formateados
 python extract_ship_components.py --type Shield        # Filtrar por tipo
 python extract_ship_components.py --json -o out.json   # Exportar datos completos
+```
+
+### export_loadout_data.py — Generar JSON para calculadora de loadout
+
+Genera `loadout-calculator.json` con masa de todos los items FPS y formulas de velocidad.
+
+```bash
+python export_loadout_data.py                      # Genera el JSON
+python export_loadout_data.py --verify             # Genera + 8 checks de calidad
+python export_loadout_data.py --dry-run            # Preview sin escribir
+python export_loadout_data.py -o otro.json         # Ruta personalizada
 ```
 
 ### Herramientas de verificacion

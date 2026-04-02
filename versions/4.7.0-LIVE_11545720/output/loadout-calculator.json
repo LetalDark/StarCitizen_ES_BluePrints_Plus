@@ -1,0 +1,1264 @@
+{
+  "version": "4.7.0-LIVE",
+  "source": "FPS Data Spreadsheet (tested in-game) + StarCitizen ES Plus",
+  "formulas": {
+    "speed_factor": {
+      "description": "Speed factor based on total loadout mass. Uses threshold table: first matching threshold (>=) from top to bottom.",
+      "thresholds": [
+        {
+          "min_mass": 80,
+          "factor": 0.5
+        },
+        {
+          "min_mass": 75,
+          "factor": 0.55
+        },
+        {
+          "min_mass": 70,
+          "factor": 0.6
+        },
+        {
+          "min_mass": 65,
+          "factor": 0.65
+        },
+        {
+          "min_mass": 60,
+          "factor": 0.7
+        },
+        {
+          "min_mass": 55,
+          "factor": 0.75
+        },
+        {
+          "min_mass": 45,
+          "factor": 0.8
+        },
+        {
+          "min_mass": 35,
+          "factor": 0.85
+        },
+        {
+          "min_mass": 25,
+          "factor": 0.9
+        },
+        {
+          "min_mass": 15,
+          "factor": 0.95
+        },
+        {
+          "min_mass": 0,
+          "factor": 1.0
+        }
+      ]
+    },
+    "sprint_speed": {
+      "description": "Sprint speed in m/s = base * speed_factor",
+      "base": 6.85
+    },
+    "run_speed": {
+      "description": "Run speed in m/s = base * speed_factor",
+      "base": 5.0
+    },
+    "ads_speed": {
+      "description": "ADS movement speed in m/s = base * speed_factor * direction_mult",
+      "base": 2.7,
+      "direction_multiplier": {
+        "forward": 1.0,
+        "lateral_back": 0.75
+      }
+    },
+    "sprint_duration": {
+      "description": "Sprint duration in seconds = 0.9 / (A * (1 + mass * B) * buff_mult - C * buff_decay). Without buff: buff_mult=1, buff_decay=1",
+      "A": 0.0768,
+      "B": 0.005,
+      "C": 0.07,
+      "buff": {
+        "description": "Hypertrophic + Energizing buff",
+        "multiplier": 0.95,
+        "decay": 1.05
+      }
+    }
+  },
+  "slots": {
+    "clothing": [
+      "hat",
+      "shirt",
+      "jacket",
+      "torso_2",
+      "gloves",
+      "pants",
+      "footwear"
+    ],
+    "armor": [
+      "undersuit",
+      "helmet",
+      "torso",
+      "backpack",
+      "arms",
+      "legs"
+    ],
+    "weapons": {
+      "primary": {
+        "weapon": 1,
+        "magazine": 1,
+        "optic": 1,
+        "barrel": 1,
+        "underbarrel": 1
+      },
+      "secondary": {
+        "weapon": 1,
+        "magazine": 1,
+        "optic": 1,
+        "barrel": 1,
+        "underbarrel": 1
+      },
+      "sidearm": {
+        "weapon": 1,
+        "magazine": 1,
+        "optic": 1,
+        "barrel": 1,
+        "underbarrel": 1
+      }
+    },
+    "items": {
+      "grenades": 4,
+      "consumables": 4,
+      "extra_magazines": 8
+    },
+    "utility": {
+      "undersuit_slot": {
+        "weapon": 1,
+        "module": 1,
+        "magazine_1": 1,
+        "magazine_2": 1
+      },
+      "legs_slot": {
+        "weapon": 1,
+        "module": 1,
+        "magazine_1": 1,
+        "magazine_2": 1
+      }
+    },
+    "gadget": 1,
+    "mobiglas": 1
+  },
+  "accessories": {
+    "description": "All weapon accessories (optics, barrels, underbarrel) weigh 0.1 kg each",
+    "optic": {
+      "mass_kg": 0.1
+    },
+    "barrel": {
+      "mass_kg": 0.1
+    },
+    "underbarrel": {
+      "mass_kg": 0.1
+    }
+  },
+  "weapons": [
+    {
+      "name": "Gallant Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.7,
+      "mass_loaded_kg": 4.3
+    },
+    {
+      "name": "Karna Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 4.2,
+      "mass_loaded_kg": 4.8
+    },
+    {
+      "name": "Killshot Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.5,
+      "mass_loaded_kg": 4.1
+    },
+    {
+      "name": "P4-AR Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.2,
+      "mass_loaded_kg": 3.7
+    },
+    {
+      "name": "P8-AR Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.6,
+      "mass_loaded_kg": 4.13
+    },
+    {
+      "name": "Parallax Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.2,
+      "mass_loaded_kg": 3.8
+    },
+    {
+      "name": "S71 Rifle",
+      "category": "assault_rifle",
+      "mass_kg": 3.4,
+      "mass_loaded_kg": 3.9
+    },
+    {
+      "name": "Demeco LMG",
+      "category": "lmg",
+      "mass_kg": 10.0,
+      "mass_loaded_kg": 11.62
+    },
+    {
+      "name": "F55 LMG",
+      "category": "lmg",
+      "mass_kg": 10.0,
+      "mass_loaded_kg": 11.6
+    },
+    {
+      "name": "Fresnel LMG",
+      "category": "lmg",
+      "mass_kg": 15.0,
+      "mass_loaded_kg": 17.2
+    },
+    {
+      "name": "FS-9 LMG",
+      "category": "lmg",
+      "mass_kg": 10.0,
+      "mass_loaded_kg": 11.6
+    },
+    {
+      "name": "Pulverizer LMG",
+      "category": "lmg",
+      "mass_kg": 18.0,
+      "mass_loaded_kg": 20.2
+    },
+    {
+      "name": "Arclight Pistol",
+      "category": "pistol",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 1.82
+    },
+    {
+      "name": "Coda Pistol",
+      "category": "pistol",
+      "mass_kg": 1.1,
+      "mass_loaded_kg": 1.4
+    },
+    {
+      "name": "LH86 Pistol",
+      "category": "pistol",
+      "mass_kg": 1.1,
+      "mass_loaded_kg": 1.4
+    },
+    {
+      "name": "Pulse Pistol",
+      "category": "pistol",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 1.82
+    },
+    {
+      "name": "S-38 Pistol",
+      "category": "pistol",
+      "mass_kg": 1.1,
+      "mass_loaded_kg": 1.4
+    },
+    {
+      "name": "Salvo Frag Pistol",
+      "category": "pistol",
+      "mass_kg": 1.0,
+      "mass_loaded_kg": 1.35
+    },
+    {
+      "name": "Tripledown Pistol",
+      "category": "pistol",
+      "mass_kg": 1.1,
+      "mass_loaded_kg": 1.4
+    },
+    {
+      "name": "WowBlast Desperado Toy Pistol",
+      "category": "pistol",
+      "mass_kg": 1.1,
+      "mass_loaded_kg": 1.4
+    },
+    {
+      "name": "Yubarev Pistol",
+      "category": "pistol",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 1.82
+    },
+    {
+      "name": "BR-2 Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.5,
+      "mass_loaded_kg": 5.48
+    },
+    {
+      "name": "Deadrig Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.3,
+      "mass_loaded_kg": 5.26
+    },
+    {
+      "name": "Devastator Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.3,
+      "mass_loaded_kg": 5.18
+    },
+    {
+      "name": "Prism Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.3,
+      "mass_loaded_kg": 5.18
+    },
+    {
+      "name": "R97 Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.0,
+      "mass_loaded_kg": 4.88
+    },
+    {
+      "name": "Ravager-212 Twin Shotgun",
+      "category": "shotgun",
+      "mass_kg": 4.3,
+      "mass_loaded_kg": 5.26
+    },
+    {
+      "name": "C54 SMG",
+      "category": "smg",
+      "mass_kg": 2.75,
+      "mass_loaded_kg": 3.05
+    },
+    {
+      "name": "Custodian SMG",
+      "category": "smg",
+      "mass_kg": 2.75,
+      "mass_loaded_kg": 3.27
+    },
+    {
+      "name": "Lumin V SMG",
+      "category": "smg",
+      "mass_kg": 3.2,
+      "mass_loaded_kg": 3.8
+    },
+    {
+      "name": "P8-SC SMG",
+      "category": "smg",
+      "mass_kg": 2.75,
+      "mass_loaded_kg": 3.18
+    },
+    {
+      "name": "Quartz SMG",
+      "category": "smg",
+      "mass_kg": 2.75,
+      "mass_loaded_kg": 3.27
+    },
+    {
+      "name": "Ripper SMG",
+      "category": "smg",
+      "mass_kg": 2.75,
+      "mass_loaded_kg": 3.27
+    },
+    {
+      "name": "A03 Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 6.0,
+      "mass_loaded_kg": 6.9
+    },
+    {
+      "name": "Arrowhead Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 7.5,
+      "mass_loaded_kg": 8.24
+    },
+    {
+      "name": "Atzkav Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 6.0,
+      "mass_loaded_kg": 6.9
+    },
+    {
+      "name": "P6-LR Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 7.5,
+      "mass_loaded_kg": 8.4
+    },
+    {
+      "name": "Scalpel Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 6.0,
+      "mass_loaded_kg": 6.32
+    },
+    {
+      "name": "Zenith Laser Sniper Rifle",
+      "category": "sniper_rifle",
+      "mass_kg": 6.0,
+      "mass_loaded_kg": 6.9
+    },
+    {
+      "name": "GP-33 MOD Grenade Launcher",
+      "category": "grenade_launcher",
+      "mass_kg": 5.0,
+      "mass_loaded_kg": 7.0
+    },
+    {
+      "name": "Scourge Railgun",
+      "category": "railgun",
+      "mass_kg": 15.0,
+      "mass_loaded_kg": 15.32
+    },
+    {
+      "name": "CF-117 Bulldog Repeater ATLS",
+      "category": "mounted_gun",
+      "mass_kg": 24.0,
+      "mass_loaded_kg": 24.0
+    },
+    {
+      "name": "YellowJacket GT-210 Gatling",
+      "category": "mounted_gun",
+      "mass_kg": 24.0,
+      "mass_loaded_kg": 24.0
+    },
+    {
+      "name": "Thlilye Laser Gatling",
+      "category": "mounted_gun",
+      "mass_kg": 40.0,
+      "mass_loaded_kg": 40.0
+    },
+    {
+      "name": "Boomtube Rocket Launcher",
+      "category": "rocket_launcher",
+      "mass_kg": 15.0,
+      "mass_loaded_kg": 15.32
+    },
+    {
+      "name": "Animus Missile Launcher",
+      "category": "missile_launcher",
+      "mass_kg": 15.0,
+      "mass_loaded_kg": 17.46
+    }
+  ],
+  "grenades": [
+    {
+      "name": "MK-4 Frag Grenade",
+      "category": "grenade",
+      "mass_kg": 0.4
+    },
+    {
+      "name": "Fuse",
+      "category": "grenade",
+      "mass_kg": 0.2
+    },
+    {
+      "name": "Luminalia Light Stick",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Pink QuikFlare",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Cyan QuikFlarePro",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Green QuikFlarePro",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Orange QuikFlarePro",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Red QuikFlarePro",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Yellow QuikFlarePro",
+      "category": "flare",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "behr_ltp_kinetic_nocarry_5m",
+      "category": "mine",
+      "mass_kg": 0.0
+    },
+    {
+      "name": "behr_ltp_kinetic_nocarry",
+      "category": "mine",
+      "mass_kg": 0.0
+    }
+  ],
+  "consumables": [
+    {
+      "name": "AdrenaPen (Demexatrine)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "AdrenaPen Xtra",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Treat Injuries (Arena Commander MedPen)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "BoostPen (Modamphetamine)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "BoostPen Xtra",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "MedPen (Hemozal)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "DetoxPen (Resurgera)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "OxyPen",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "OpioPen (Roxaphen)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "DeconPen (Canoiodide)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "DeconPen Xtra",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "DeconPen (Canoiodide) Blocker",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "CorticoPen (Sterogen)",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "CorticoPen Xtra",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "VitalityPen",
+      "category": "medical",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "SLAM",
+      "category": "drug",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Drema Injector",
+      "category": "drug",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Tigersclaw",
+      "category": "drug",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Re-Authorizer",
+      "category": "hacking",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "icePick",
+      "category": "hacking",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "FUNT",
+      "category": "hacking",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Ripper",
+      "category": "hacking",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Walesko",
+      "category": "hacking",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Decryption Key",
+      "category": "hacking",
+      "mass_kg": 1.0
+    }
+  ],
+  "melee": [
+    {
+      "name": "Demon Fang Combat Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Enjakte Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Eyaja Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Myondo Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Sizi Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Sawtooth Combat Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Shiv",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "TBF-4 Combat Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "FSK-8 Combat Knife",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "VCK-1 Blade",
+      "mass_kg": 1.0
+    }
+  ],
+  "gadgets": [
+    {
+      "name": "OptiMax",
+      "mass_kg": 10.0
+    },
+    {
+      "name": "Waveshift",
+      "mass_kg": 10.0
+    },
+    {
+      "name": "Okunis",
+      "mass_kg": 10.0
+    },
+    {
+      "name": "Sabir",
+      "mass_kg": 10.0
+    },
+    {
+      "name": "BoreMax",
+      "mass_kg": 10.0
+    },
+    {
+      "name": "Stalwart",
+      "mass_kg": 10.0
+    }
+  ],
+  "utilities": [
+    {
+      "name": "ParaMed \"AA Support\" Medical Device",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 1.82
+    },
+    {
+      "name": "ParaMed Medical Device",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 1.82
+    },
+    {
+      "name": "XDL Rangefinder",
+      "mass_kg": 1.6
+    },
+    {
+      "name": "Pyro RYT Multi-Tool",
+      "mass_kg": 1.5,
+      "mass_loaded_kg": 2.32
+    },
+    {
+      "name": "MaxLift Tractor Beam",
+      "mass_kg": 4.0,
+      "mass_loaded_kg": 4.5
+    },
+    {
+      "name": "Cambio SRT",
+      "mass_kg": 4.0,
+      "mass_loaded_kg": 5.3
+    },
+    {
+      "name": "APX Fire Extinguisher",
+      "mass_kg": 3.2,
+      "mass_loaded_kg": 13.2
+    }
+  ],
+  "armor": [
+    {
+      "name": "Heavy Arms",
+      "type": "arms",
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Hv AI Arms",
+      "type": "arms",
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Light Arms",
+      "type": "arms",
+      "mass_kg": 2.0
+    },
+    {
+      "name": "Medium Arms",
+      "type": "arms",
+      "mass_kg": 4.0
+    },
+    {
+      "name": "Arden-CL Backpack",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Cataby Backpack MPUV-1C Edition",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "CSP-68L Backpack",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Inmate Workpack",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "MacFlex \"Rucksack\" Backpack",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "ThermoWeave Breathing Apparatus",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Warden Backpack",
+      "type": "backpack",
+      "size": 1,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Aril Backpack",
+      "type": "backpack",
+      "size": 2,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Aril Backpack Collector",
+      "type": "backpack",
+      "size": 2,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "CSP-68M Backpack",
+      "type": "backpack",
+      "size": 2,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Sinkhole Backpack",
+      "type": "backpack",
+      "size": 2,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Testudo Backpack",
+      "type": "backpack",
+      "size": 2,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "CSP-68H Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Palatino Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Morozov-CH Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Novikov Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Pembroke Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Stirling Exploration Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Zeus Exploration Suit Backpack",
+      "type": "backpack",
+      "size": 3,
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Flightsuit Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Heavy Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Hv AI Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Hv Util Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Light Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Medium Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Undersuit Helmet",
+      "type": "helmet",
+      "mass_kg": 5.05
+    },
+    {
+      "name": "Heavy Legs",
+      "type": "legs",
+      "mass_kg": 8.0
+    },
+    {
+      "name": "Hv AI Legs",
+      "type": "legs",
+      "mass_kg": 8.0
+    },
+    {
+      "name": "Light Legs",
+      "type": "legs",
+      "mass_kg": 3.0
+    },
+    {
+      "name": "Medium Legs",
+      "type": "legs",
+      "mass_kg": 6.0
+    },
+    {
+      "name": "Heavy Torso",
+      "type": "torso",
+      "mass_kg": 7.0
+    },
+    {
+      "name": "Hv AI Torso",
+      "type": "torso",
+      "mass_kg": 7.0
+    },
+    {
+      "name": "Light Torso",
+      "type": "torso",
+      "mass_kg": 3.0
+    },
+    {
+      "name": "Medium Torso",
+      "type": "torso",
+      "mass_kg": 5.0
+    },
+    {
+      "name": "Bespokesuit",
+      "type": "undersuit",
+      "mass_kg": 21.0
+    },
+    {
+      "name": "Flightsuit",
+      "type": "undersuit",
+      "mass_kg": 1.0
+    },
+    {
+      "name": "Undersuit",
+      "type": "undersuit",
+      "mass_kg": 1.0
+    }
+  ],
+  "clothing": [
+    {
+      "name": "Footwear",
+      "type": "footwear",
+      "mass_kg": 0.3
+    },
+    {
+      "name": "Gloves",
+      "type": "gloves",
+      "mass_kg": 0.1
+    },
+    {
+      "name": "Hat",
+      "type": "hat",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Pants",
+      "type": "pants",
+      "mass_kg": 0.4
+    },
+    {
+      "name": "Shirt",
+      "type": "shirt",
+      "mass_kg": 0.25
+    },
+    {
+      "name": "Jacket",
+      "type": "jacket",
+      "mass_kg": 0.5
+    },
+    {
+      "name": "Torso 2",
+      "type": "torso_2",
+      "mass_kg": 1.0
+    }
+  ],
+  "fixed": [
+    {
+      "name": "mobiGlas",
+      "mass_kg": 0.5
+    }
+  ],
+  "magazines": [
+    {
+      "name": "Scourge Railgun Magazine (5 cap)",
+      "capacity": 5,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Animus Missile Launcher Magazine (3 cap)",
+      "capacity": 3,
+      "mass_kg": 2.46
+    },
+    {
+      "name": "GP-33 MOD Grenade Launcher Magazine (6 cap)",
+      "capacity": 6,
+      "mass_kg": 2.0
+    },
+    {
+      "name": "FS-9 Magazine (75 cap)",
+      "capacity": 75,
+      "mass_kg": 1.6
+    },
+    {
+      "name": "S-38 Magazine (20 cap)",
+      "capacity": 20,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "P4-AR Magazine (40 cap)",
+      "capacity": 40,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "P8-AR Rifle Magazine (15 Cap)",
+      "capacity": 15,
+      "mass_kg": 0.53
+    },
+    {
+      "name": "BR-2 Shotgun Magazine (12 cap)",
+      "capacity": 12,
+      "mass_kg": 0.98
+    },
+    {
+      "name": "P8-SC SMG Magazine (45 cap)",
+      "capacity": 45,
+      "mass_kg": 0.43
+    },
+    {
+      "name": "P6-LR Magazine (8 cap)",
+      "capacity": 8,
+      "mass_kg": 0.9
+    },
+    {
+      "name": "ParaMed Refill",
+      "capacity": 200,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "glsn_shotgun_ballistic_01_mag",
+      "capacity": 5,
+      "mass_kg": 0.96
+    },
+    {
+      "name": "F55 LMG Magazine (150 cap)",
+      "capacity": 150,
+      "mass_kg": 1.6
+    },
+    {
+      "name": "LH86 Pistol Magazine (25 cap)",
+      "capacity": 25,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "S71 Rifle Magazine (30 cap)",
+      "capacity": 30,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "R97 Shotgun Magazine (18 cap)",
+      "capacity": 18,
+      "mass_kg": 0.88
+    },
+    {
+      "name": "C54 SMG Magazine (50 cap)",
+      "capacity": 50,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "A03 Sniper Rifle Magazine (15 cap)",
+      "capacity": 15,
+      "mass_kg": 0.9
+    },
+    {
+      "name": "Pyro RYT Multi-Tool Battery",
+      "capacity": 100,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "LifeGuard Refill",
+      "capacity": 300,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Cambio-Lite SRT Canister (Filled)",
+      "capacity": 250,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "Cambio-Lite SRT Canister (Empty)",
+      "capacity": 250,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "Cambrio SRT Battery",
+      "capacity": 50,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "Cambio SRT Canister (Filled)",
+      "capacity": 750,
+      "mass_kg": 0.8
+    },
+    {
+      "name": "Cambio SRT Canister (Empty)",
+      "capacity": 750,
+      "mass_kg": 0.8
+    },
+    {
+      "name": "MaxLift Tractor Beam Battery",
+      "capacity": 60,
+      "mass_kg": 0.5
+    },
+    {
+      "name": "Salvo Frag Pistol Magazine (8 cap)",
+      "capacity": 8,
+      "mass_kg": 0.35
+    },
+    {
+      "name": "APX Fire Extinguisher Canister",
+      "capacity": 2000,
+      "mass_kg": 10.0
+    },
+    {
+      "name": "Demeco LMG Battery (100 cap)",
+      "capacity": 100,
+      "mass_kg": 1.62
+    },
+    {
+      "name": "Arclight Pistol Battery (30 cap)",
+      "capacity": 30,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Gallant Rifle Battery (45 cap)",
+      "capacity": 45,
+      "mass_kg": 0.6
+    },
+    {
+      "name": "Lumin V SMG Battery (45 cap)",
+      "capacity": 45,
+      "mass_kg": 0.6
+    },
+    {
+      "name": "Arrowhead Sniper Rifle Battery (16 cap)",
+      "capacity": 16,
+      "mass_kg": 0.74
+    },
+    {
+      "name": "Coda Pistol Magazine (6 cap)",
+      "capacity": 6,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "Karna Rifle Battery (35 cap)",
+      "capacity": 35,
+      "mass_kg": 0.6
+    },
+    {
+      "name": "Ravager-212 Twin Shotgun Magazine (16 cap)",
+      "capacity": 16,
+      "mass_kg": 0.96
+    },
+    {
+      "name": "Devastator Shotgun Battery (12 cap)",
+      "capacity": 12,
+      "mass_kg": 0.88
+    },
+    {
+      "name": "Custodian SMG Magazine (60 cap)",
+      "capacity": 60,
+      "mass_kg": 0.52
+    },
+    {
+      "name": "Scalpel Sniper Rifle Magazine (12 cap)",
+      "capacity": 12,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Yubarev Pistol Battery (10 cap)",
+      "capacity": 10,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Atzkav Sniper Rifle Battery (8 cap)",
+      "capacity": 8,
+      "mass_kg": 0.9
+    },
+    {
+      "name": "Pulverizer LMG Magazine (120 Cap)",
+      "capacity": 120,
+      "mass_kg": 2.2
+    },
+    {
+      "name": "Tripledown Pistol Magazine (12 Cap)",
+      "capacity": 12,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "Killshot Rifle Magazine (45 Cap)",
+      "capacity": 45,
+      "mass_kg": 0.6
+    },
+    {
+      "name": "Deadrig Shotgun Magazine (8 cap)",
+      "capacity": 8,
+      "mass_kg": 0.96
+    },
+    {
+      "name": "Ripper SMG Battery (60 cap)",
+      "capacity": 60,
+      "mass_kg": 0.52
+    },
+    {
+      "name": "Boomtube Rocket",
+      "capacity": 1,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "WowBlast Desperado Toy Pistol Magazine (10 cap) AC",
+      "capacity": 100,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "WowBlast Desperado Toy Pistol Magazine (10 cap)",
+      "capacity": 10,
+      "mass_kg": 0.3
+    },
+    {
+      "name": "Fresnel Energy LMG Battery (165 Cap)",
+      "capacity": 165,
+      "mass_kg": 2.2
+    },
+    {
+      "name": "Pulse Laser Pistol Battery (60 Cap)",
+      "capacity": 60,
+      "mass_kg": 0.32
+    },
+    {
+      "name": "Parallax Rifle Battery (80 Cap)",
+      "capacity": 80,
+      "mass_kg": 0.6
+    },
+    {
+      "name": "Prism Laser Shotgun Battery (20 cap)",
+      "capacity": 20,
+      "mass_kg": 0.88
+    },
+    {
+      "name": "Quartz Energy SMG Battery (45 cap)",
+      "capacity": 45,
+      "mass_kg": 0.52
+    },
+    {
+      "name": "Zenith Laser Sniper Rifle Battery (22 Cap)",
+      "capacity": 22,
+      "mass_kg": 0.9
+    }
+  ]
+}

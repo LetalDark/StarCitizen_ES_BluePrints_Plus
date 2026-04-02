@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.4.3 — 2026-04-02
+
+**Calculadora de Loadout FPS y limpieza del repositorio público.**
+
+**Nuevo: export_loadout_data.py:**
+- Genera `loadout-calculator.json` desde los CSVs de stats testeados in-game
+- 207 items con masa: 46 armas, 55 cargadores, 41 armaduras, 7 ropa, 24 consumibles, 11 granadas, 10 melee, 6 gadgets, 7 utilities
+- Fórmulas de velocidad verificadas: Speed Factor, Sprint/Run/ADS Speed, Sprint Duration
+- Incluye buff Hypertrophic + Energizing
+- Flag --verify con 8 checks de calidad
+
+**Limpieza repositorio:**
+- CSVs testeados sacados del tracking (siguen en local, no se ven en GitHub)
+- ZIPs de distribución sacados del tracking (van vía GitHub Releases)
+- Guía .claude filtrada del historial público
+
+**Estadísticas:**
+- Líneas en global.ini: 87,656 (sin cambios)
+- Items en loadout-calculator.json: 207
+
 ## v1.4.2 — 2026-04-01
 
 **Prefijos [CLS|tam|grado], eliminación de líneas redundantes y Disto/masa en Coolers.**
