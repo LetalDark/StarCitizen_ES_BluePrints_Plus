@@ -4,8 +4,9 @@
 # Sources (se regeneran desde repos y p4k, referenciadas en README)
 versions/*/sources/
 
-# Scripts (locales)
+# Scripts y datos (locales)
 *.py
+*.json
 
 # Config local
 .claude/
