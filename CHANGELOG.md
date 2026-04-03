@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.5.2 — 2026-04-04
+
+**Build:** 4.7.0-HOTFIX_11576750
+
+**Cambios:**
+- Actualizado al nuevo hotfix 11576750
+- Corregido merge: las descripciones de misiones con blueprints ahora conservan la traducción al español completa
+- Los títulos de misiones con [BP] ahora muestran el título traducido en español
+- 7 traducciones adicionales corregidas (vehículos, ropa, localizaciones)
+- Regresiones de traducción eliminadas respecto a versiones anteriores
+
+**Estadísticas:**
+- Líneas en global.ini: 87,613
+
 ## v1.5.1 — 2026-04-03
 
 **Build:** 4.7.0-HOTFIX_11568150
