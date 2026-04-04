@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.5.5 — 2026-04-04
+
+**Build:** 4.7.0-HOTFIX_11576750
+
+**Cambios:**
+- Fix: MagnaBloom (Power Plant) ahora muestra stats correctamente (334 componentes con stats)
+- Mejorada la cobertura de stats en skins de armas FPS
+- Actualizada la tabla de estadisticas del README con numeros verificados
+
+**Estadísticas:**
+- Líneas en global.ini: 87,683
+
 ## v1.5.4 — 2026-04-04
 
 **Build:** 4.7.0-HOTFIX_11576750

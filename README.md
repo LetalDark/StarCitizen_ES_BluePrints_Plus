@@ -15,9 +15,9 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 7. **Mejora titulos de hauling** añadiendo la ruta (origen>destino) al titulo del contrato
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
 9. **Inyecta stats reales de armas FPS** (DPS, Alpha, Velocidad, Peso, Caida de daño) con datos testeados in-game
-10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto), peso de cargadores, mochilas, ropa, accesorios y mas (1,996 items en total)
-11. **Inyecta stats de armas de nave** (DPS, Alpha, RPM, Velocidad, Rango, Penetracion, Capacitor, Masa, HP, EM, AoE) extraidos directamente de los datos del juego (125 armas)
-12. **Inyecta stats de componentes de nave** (339 componentes): Power Plants, Quantum Drives, Jump Drives, Shields, Coolers y Radars con datos del juego
+10. **Inyecta stats de armaduras** (Peso, Reduccion Stun, Reduccion Impacto), peso de cargadores, mochilas, ropa, accesorios y mas
+11. **Inyecta stats de armas de nave** (DPS, Alpha, RPM, Velocidad, Rango, Penetracion, Capacitor, Masa, HP, EM, AoE) extraidos directamente de los datos del juego (122 armas)
+12. **Inyecta stats de componentes de nave** (334 componentes): Power Plants, Quantum Drives, Jump Drives, Shields, Coolers y Radars con datos del juego
 13. **Completa claves que faltan** extrayendo los textos oficiales directamente del Data.p4k del juego
 14. **Corrige errores** de las fuentes originales (GUIDs nulos, pools faltantes, nombres de armadura incorrectos)
 
@@ -39,25 +39,21 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 1 | Traduccion base ES | Traduccion comunitaria completa al español | 87.591 | Thord82 |
 | 2 | Blueprints misiones | Planos posibles en misiones, traducidos al ES + correcciones | 440 | MrKraken + nuestras |
 | 3 | Traducciones p4k | Claves que faltan en Thord82, traducidas del ingles oficial | 70 | Data.p4k CIG |
-| 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 208 | ExoAE |
-| 5 | Componentes clase/grado | Prefijo `[MIL|2|A]`, `[CIV|1|C]`, etc. en componentes de naves | 383 | ExoAE + datos del juego |
-| 6 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas | 115 | BeltaKoda |
+| 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 242 | ExoAE |
+| 5 | Componentes clase/grado | Prefijo `[MIL|2|A]`, `[CIV|1|C]`, etc. en componentes de naves | 378 | ExoAE + datos del juego |
+| 6 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas | 114 | BeltaKoda |
 | 7 | Sustancias ilegales | Marca `[!]` en drogas (WiDoW, SLAM, Maze, etc.) | 8 | ExoAE |
 | 8 | HUD mining | Abreviaturas para evitar solapamiento (Inest:, Res:) | 2 | MrKraken/ExoAE |
 | 9 | Minerales | Hephaestanite → Heph + unificacion de (Raw)/(Crudo) a (Bruto) | 19 | MrKraken/ExoAE |
 | 10 | Hauling titles | Ruta origen>destino en titulos de transporte de carga | 5 | MrKraken |
 | 11 | Limpieza | Trailing spaces eliminados | 604 | BeltaKoda |
 | 12 | Stats armas FPS | DPS, Alpha, Vel, Peso, Caida de daño, modos de fuego | 295 | Tests in-game + Data.p4k |
-| 13 | Stats cargadores | Peso del cargador | 47 | Tests in-game |
-| 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 774 | Tests in-game + Data.p4k |
-| 15 | Stats ropa | Peso de camisetas, chaquetas, pantalones, gorros, calzado, guantes | 615 | Tests in-game |
-| 16 | Stats mochilas | Peso 6 kg | 102 | Tests in-game |
-| 17 | Stats items FPS | Peso de granadas, multitools, gadgets, flares | 111 | Tests in-game |
-| 18 | Stats accesorios arma | Stats de miras, cañones, suppressors | 48 | Tests in-game |
-| 19 | Stats accesorios multitool | Peso de cutter, mining, salvage, healing, tractor beam | 5 | Tests in-game |
-| 20 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
-| 21 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 125 | Datos del juego |
-| 22 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 339 | Datos del juego |
+| 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
+| 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 694 | Tests in-game + Data.p4k |
+| 15 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
+| 16 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
+| 17 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
+| 18 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 
 **Total: 87.683 claves**
 
