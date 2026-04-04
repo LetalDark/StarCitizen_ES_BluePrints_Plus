@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.5.6 — 2026-04-04
+
+**Build:** 4.7.0-HOTFIX_11576750
+
+**Cambios:**
+- Fix: la marca `[BP]` en misiones con blueprints ahora aparece siempre al principio del titulo
+- Corregidos 195 titulos de misiones que tenian `[BP]` al final o texto en ingles concatenado
+
+**Estadísticas:**
+- Líneas en global.ini: 87,683
+
 ## v1.5.5 — 2026-04-04
 
 **Build:** 4.7.0-HOTFIX_11576750

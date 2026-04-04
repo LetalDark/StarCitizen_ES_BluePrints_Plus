@@ -10,7 +10,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 2. **Añade datos de blueprints** de las misiones que dan planos, con la lista de posibles recompensas traducida al español
 3. **Añade clase/grado a los componentes** de naves (coolers, power plants, quantum drives, shields, radars) con prefijo compacto (ej: `[MIL|2|A] Bracer` = Militar, Tamaño 2, Grado A)
 4. **Añade tracking type a misiles** (IR/EM/CS) y tamaño a bombas (B3/B5/B10) para saber que contramedida usar
-5. **Marca misiones con blueprints** con `[BP]` en el titulo para identificarlas rapidamente
+5. **Marca misiones con blueprints** con `[BP]` al principio del titulo para identificarlas rapidamente
 6. **Marca sustancias ilegales** con `[!]` para avisar antes de transportarlas
 7. **Mejora titulos de hauling** añadiendo la ruta (origen>destino) al titulo del contrato
 8. **Acorta nombres largos** en el HUD de mineria para evitar solapamiento (Hephaestanite → Heph, Inestabilidad → Inest:)
