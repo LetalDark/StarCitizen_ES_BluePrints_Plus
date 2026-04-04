@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.5.4 — 2026-04-04
+
+**Build:** 4.7.0-LIVE_11545720
+
+**Cambios:**
+- Corregidos 10 nombres de armadura que mostraban la pieza equivocada
+  - Calico Tactical/Desert: core mostraba "Piernas" en vez de "Pechera"
+  - Aril (5 variantes): piernas mostraban "Brazos" en vez de "Piernas"
+  - ADP-mk4 Justified: casco y piernas mostraban "Pechera"
+  - Horizon Crusader: casco mostraba "Pechera" en vez de "Casco"
+
+**Estadísticas:**
+- Líneas en global.ini: 87,656
+
 ## v1.5.3 — 2026-04-04
 
 **Build:** 4.7.0-HOTFIX_11576750
