@@ -49,7 +49,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 11 | Limpieza | Trailing spaces eliminados | 605 | BeltaKoda |
 | 12 | Stats armas FPS | DPS, Alpha, Vel, Peso, Caida de daño, modos de fuego | 295 | Tests in-game + Data.p4k |
 | 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
-| 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 694 | Tests in-game + Data.p4k |
+| 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 699 | Tests in-game + Data.p4k |
 | 15 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
 | 16 | Correcciones nombres | Nombres de armadura incorrectos (pieza equivocada) | 10 | Verificacion manual |
 | 17 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
