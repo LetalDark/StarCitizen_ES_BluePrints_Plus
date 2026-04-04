@@ -5,8 +5,14 @@
 **Build:** 4.7.0-HOTFIX_11576750
 
 **Cambios:**
+- Fix regresión: restaurados todos los datos de componentes de nave
+  - Prefijos [CLS|tam|grado] en 383 componentes (Power Plants, Shields, Coolers, QDrives, Radars, Jump Drives)
+  - Eliminadas líneas redundantes de Tamaño/Grado/Clase de las descripciones
+  - Tracking de misiles IR/EM/CS y tamaño de bombas B# restaurados
+  - Avisos [!] en sustancias ilegales restaurados
+  - Abreviaturas HUD minería, minerales (Bruto), títulos hauling restaurados
 - Abreviados nombres de minerales en el HUD de minería: "(Mineral)" → "(Mnl)" (15 minerales)
-- Fix visual: los números de calidad ya no se solapan con el texto del material en el scanner
+- Tungsteno → Tungsten para reducir longitud en scanner
 
 **Estadísticas:**
 - Líneas en global.ini: 87,613
