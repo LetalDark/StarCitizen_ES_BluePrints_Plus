@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.6.2 — 2026-04-05
+
+**Build:** 4.7.0-LIVE_11576750
+
+**Cambios:**
+- Abreviados nombres de minerales en HUD de mineria para evitar solapamiento (max 15 chars)
+  - Minerales ore: "(Mineral)" → "(Mnl)"
+  - Minerales raw: "(Bruto)" → "(Bto)"
+  - Nombres largos acortados: Tungsteno → Tungsten, Feynmaline → Feynmalin, Hephaestanite sin sufijo
+- Recuperadas 10 traducciones que se habian perdido entre versiones (carreras, tutorial, misiones, eventos)
+
+**Estadísticas:**
+- Líneas en global.ini: 87,683
+
 ## v1.6.1 — 2026-04-04
 
 **Build:** 4.7.0-LIVE_11576750
