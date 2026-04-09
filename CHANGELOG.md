@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.7.1 — 2026-04-09
+
+**Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
+
+Correcciones de integridad: variables de mision rotas, tutoriales de controles truncados, descripciones legales desactualizadas y el peso mal calculado del cohete del Boomtube.
+
+**Variables de mision corregidas (>150 correcciones):**
+- Varias descripciones de misiones tenian variables internas con nombres mal escritos o traducidos (`Profundidad` en lugar de `Depth`, `Ruta` en lugar de `Route`, `Nombre` en lugar de `Name`, etc.) que impedian al juego sustituirlas correctamente. Ahora el juego muestra el valor real (el nombre del objetivo, el destino, la ubicacion) en vez del texto crudo.
+- Nombres con caracteres especiales (tildes, ñ) ya se muestran correctamente en chat, invitaciones de grupo y notificaciones de comms.
+- Case mismatches en variables (`|address` vs `|Address`) arreglados en 36 misiones.
+
+**Tutoriales y textos truncados completados:**
+- 19 textos de tutoriales de controles (movimiento, disparo, contramedidas, strafing, freelook, rolling, etc.) que aparecian cortados a mitad del combo de teclas. Ahora se leen completos con todas las teclas asignadas.
+- 8 simbolos quimicos de minerales (NH₃ amoniaco, CO₂, CH₄ metano, O₂ oxigeno, etc.) que aparecian truncados en la UI.
+- 7 descripciones legales (JurisdictionJournals de ArcCorp, Crusader, Hurston, Klescher, microTech, Alianza del Pueblo, UEE) reescritas con toda la tabla legal dinamica (delitos graves, delitos menores, bienes prohibidos, sustancias controladas de clase A/B/C) que CIG habia añadido y que hasta ahora aparecia solo en ingles.
+- 5 titulos de contratos Covalex HaulCargo corregidos (ahora muestran "Transporte de Carga" legible en vez de un placeholder roto).
+- 10 descripciones del HUD de mineria con parametros que no se sustituian.
+- 3 descripciones de misiones Eliminate/Delivery retraducidas al texto oficial.
+
+**Fix en el cohete del Boomtube:**
+- La municion del lanzacohetes Boomtube mostraba incorrectamente los stats del arma completa (DPS, Alpha, peso del lanzador) en lugar del peso real del cohete individual. Ahora muestra `Capacidad: 1 | 0.32 kg` correctamente.
+
+**Correcciones de contenido:**
+- Eliminadas algunas frases que estaban en la traduccion anterior pero no existen en el juego original (CleanAir, Headhunters), alineando el texto con lo que CIG escribio.
+
+**Estadisticas:**
+- Lineas en global.ini: 87,718 (sin cambio respecto a v1.7.0)
+- Correcciones manuales totales: 39 → 98
+
 ## v1.7.0 — 2026-04-09
 
 **Build:** 4.7.1-LIVE_11592622
