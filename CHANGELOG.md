@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.9.2 — 2026-04-12
+
+**Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
+
+Correccion de tres traducciones que sonaban forzadas por seguir demasiado al pie de la letra el orden de las palabras del ingles original.
+
+**Cambios:**
+- Aviso de sensor: `Radar contacto` -> `Contacto de radar` (mas natural en español).
+- HUD de combate: `Ciclismo objetivo` -> `Cambiar objetivo`. *"Ciclismo"* sonaba al deporte de la bici en lugar de a la accion de pasar de un objetivo a otro.
+
+**Estadisticas:**
+- Lineas en global.ini: 87718 (sin cambio)
+
 ## v1.9.1 — 2026-04-12
 
 **Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
