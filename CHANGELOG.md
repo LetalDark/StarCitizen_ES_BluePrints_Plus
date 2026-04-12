@@ -1,5 +1,39 @@
 # Changelog
 
+## v1.9.0 — 2026-04-12
+
+**Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
+
+Mejora del estilo de misiles, torpedos y bombas para que todos sigan el mismo formato visible en pantalla, mas correcciones puntuales de traducciones y nombres.
+
+**Misiles, torpedos y bombas con estilo uniforme:**
+- Todos los misiles y torpedos ahora muestran el tracking type (`IR`/`EM`/`CS`) como prefijo al inicio del nombre, eliminando duplicaciones donde el sufijo del modelo (`-CS`/`-EM`/`-IR`) ya lo indicaba.
+- Ground missiles y torpedos grandes (Spearhead, Agitator, Argos, Vanquisher, Calamity, Apex, Executor, Torpedo Short) que antes salian sin tracking visible, ahora lo llevan al inicio.
+- Las bombas conservan el formato `B#` (B3, B5, B10) segun su tamaño.
+- Pequeño bug fix: el Thunderbolt S03 marcado erroneamente como `CS` ahora muestra el `EM` correcto.
+
+**Correcciones puntuales de nombres y traducciones:**
+- Componentes MISC con palabras comunes traducidas correctamente: Reliant Mako Wing Mount, Reliant/Prospector CML Flare, FuelPod, Starfarer Captain's Seat, SelfDestruct, FuelRefinery.
+- 6 titulos de misiones que tenian texto español+ingles concatenado sin separador (cfp_defendship, cfp_eliminateall_fromCFP_XT, RAIN_collectresources, vaughn_assassination) ahora muestran solo la version en español.
+- 14 nombres de pinturas y vehiculos con texto literalmente duplicado (`Greycat UTVGreycat UTV`, `Pintura Hull B KeystonePintura Hull B Keystone`, etc.) limpiados.
+- `PIT_Inventory_Helmet`: la opcion del menu inventario para intercambiar casco mostraba "Casco de palanca" (mala traduccion del verbo "swap"). Corregido a "Intercambiar Casco".
+- `F8C Stealth`: revertido el nombre traducido "Apuñalador Sigiloso" al nombre propio original "Sneaky Stabber".
+
+**Componentes con grado preservado:**
+- Algunos componentes de naves industriales (AEGS Reclaimer cooler/shield, ORIG 890J shield) recuperan su clase y grado correctos que habian perdido en versiones intermedias.
+- 5 manufacturers de componentes de nave que estaban sin clasificar ahora reciben su prefijo (54 radares afectados).
+
+**Componentes que el motor del juego no encontraba:**
+- 4 mensajes de error de eventos antiguos (DynamicEvent_FleetWeek2022_FailReason_*) que tenian un espacio de mas en su clave y el juego no los matcheaba ahora se cargan correctamente.
+
+**45 descripciones de mision con "Posibles Planos" propagadas:**
+- Misiones con multiples variantes de descripcion (boss, side, intro, etc.) ahora todas muestran la lista de blueprints, no solo la principal.
+
+**Estadisticas:**
+- Lineas en global.ini: 87.718 (sin cambio en cardinalidad vs v1.8.3)
+- Misiles con tracking type visible: 108 → 136 (+28 ground missiles y torpedos grandes)
+- Componentes con clase y grado completos: 379 → 382
+
 ## v1.8.3 — 2026-04-12
 
 **Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)

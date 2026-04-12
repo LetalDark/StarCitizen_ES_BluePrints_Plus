@@ -41,8 +41,8 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 2 | Blueprints misiones | Planos posibles en misiones, traducidos al ES + correcciones | 502 | MrKraken + nuestras |
 | 3 | Traducciones p4k | Claves que faltan en Thord82, traducidas del ingles oficial | 82 | Data.p4k CIG |
 | 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 234 | datos del juego + ExoAE |
-| 5 | Componentes clase/grado | Prefijo `[MIL\|2\|A]`, `[CIV\|1\|C]`, etc. en componentes de naves | 379 | ExoAE + datos del juego |
-| 6 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas | 114 | BeltaKoda |
+| 5 | Componentes clase/grado | Prefijo `[MIL\|2\|A]`, `[CIV\|1\|C]`, etc. en componentes de naves | 382 | datos del juego |
+| 6 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas (estilo uniforme) | 136 | datos del juego |
 | 7 | Sustancias ilegales | Marca `[!]` en drogas (WiDoW, SLAM, Maze, etc.) | 8 | ExoAE |
 | 8 | HUD mining | Abreviaturas para evitar solapamiento (Inest:, Res:) | 2 | MrKraken/ExoAE |
 | 9 | Minerales | Heph + ore (Mnl) + raw (Bto) + ajustes nombres largos (max 14 chars) | 47 | MrKraken/ExoAE |
@@ -52,7 +52,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
 | 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 713 | Tests in-game + Data.p4k |
 | 15 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
-| 16 | Correcciones manuales | Nombres armadura, descripciones, placeholders de misiones, traducciones recuperadas | 100 | Verificacion manual |
+| 16 | Correcciones manuales | Nombres armadura, descripciones, placeholders de misiones, traducciones recuperadas | 120 | Verificacion manual |
 | 17 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
 | 18 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 
