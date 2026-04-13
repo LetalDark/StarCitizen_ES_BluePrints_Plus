@@ -56,7 +56,7 @@ Star Citizen no tiene traduccion oficial completa al español. Existen proyectos
 | 17 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
 | 18 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 
-**Total: 87,718 claves**
+**Total: 87,626 claves**
 
 ## Instalacion
 

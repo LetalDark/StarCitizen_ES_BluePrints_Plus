@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.9.3 — 2026-04-13
+
+**Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
+
+Limpieza interna del archivo de traduccion: eliminadas 92 entradas heredadas de versiones antiguas que el juego ya no usa (codigo muerto). El parche queda mas pequeño y alineado al 100% con las claves activas del juego.
+
+**Cambios:**
+- Eliminadas 92 entradas obsoletas que correspondian a renombres antiguos del juego: dialogos de comentarista de carreras, descripciones de misiones de mineria de Shubin, mision Hockrow Facility Delve, mision blackbox recovery, opciones del head-tracking Tobii, tutoriales retirados, y variantes antiguas de items y torretas.
+- Las traducciones de esas entradas se conservan automaticamente bajo los nombres nuevos que usa el juego, asi que no se pierde ninguna traduccion visible — solo se elimina el duplicado interno.
+
+**Estadisticas:**
+- Lineas en global.ini: 87626 (antes 87718, -92)
+
 ## v1.9.2 — 2026-04-12
 
 **Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
