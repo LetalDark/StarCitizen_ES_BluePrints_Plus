@@ -55,7 +55,7 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 | 13 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
 | 14 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto | 713 | Tests in-game + Data.p4k |
 | 15 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
-| 16 | Correcciones manuales | Nombres armadura, descripciones, placeholders de misiones, traducciones recuperadas | 132 | Verificacion manual |
+| 16 | Correcciones manuales | Nombres armadura normalizados al formato `<Set> (Parte)`, descripciones, placeholders de misiones, traducciones recuperadas | 161 | Verificacion manual |
 | 17 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
 | 18 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 
@@ -136,6 +136,21 @@ Cargado: 3.18 kg | Descargado: 2.75 kg
 
 Valores grandes usan K: `2.1K`, `95K`, `285K`
 
+## Formato de nombres de armadura
+
+Desde v1.9.5 todas las piezas de armadura siguen el formato unificado `<Set> <Variante> (Parte)`, mirror del inglés oficial del juego. Las 4 partes usan etiquetas en español consistentes:
+
+- **Pecho** (core)
+- **Brazos** (arms)
+- **Piernas** (legs)
+- **Casco** (helmet)
+
+Las variantes "Modificado/a/s" concuerdan en género con la parte: `(Pecho Modificado)`, `(Piernas Modificadas)`, `(Brazos Modificados)`, `(Casco Modificado)`.
+
+Ejemplos: `Citadel Dark Red (Pecho)`, `Aves Starchaser (Piernas)`, `ADP-mk4 Big Boss (Casco)`, `DCP Camuflaje Cazador (Brazos)`, `ADP-mk4 (Pecho Modificado)`.
+
+Los trajes tipo pantalón (Antium, Palatino) usan `(Pantalones)` como variante para reflejar que son prendas de tela, no armadura rígida.
+
 ## Formato de stats de armaduras
 
 Cada pieza de armadura muestra peso, reduccion de stun y reduccion de impacto justo despues de los metadatos:
@@ -152,7 +167,7 @@ Las armaduras con descripcion compartida (sin pieza especifica) muestran tabla d
 ```
 Stun: 45% | Impacto: 31%
 *Descripción compartida entre piezas
-Casco: 5 | Pechera: 5 | Brazos: 4 | Piernas: 6 kg
+Casco: 5 | Pecho: 5 | Brazos: 4 | Piernas: 6 kg
 ```
 
 ## Formato de stats de armas de nave

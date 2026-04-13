@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.9.5 — 2026-04-13
+
+**Build:** 4.7.1-HOTFIX_11617053
+
+Refactor completo de nombres de piezas de armadura. Unifica el estilo de todas las piezas al formato `<Set> <Variante> (Parte)`, mirror del inglés oficial del juego. Antes convivían tres formatos distintos heredados del histórico de traducción; a partir de ahora los nombres son consistentes entre sí, más cortos y alineados con cómo CIG los nombra internamente.
+
+**Cambios:**
+- Piezas de armadura renombradas al formato unificado: ej. `Citadel Dark Red (Pecho)`, `Aves Starchaser (Piernas)`, `ADP-mk4 Big Boss (Casco)`, `DCP Camuflaje Cazador (Brazos)`. Las 4 partes (pecho/brazos/piernas/casco) usan el mismo esquema.
+- Variantes modificadas con concordancia de género: `(Pecho Modificado)`, `(Brazos Modificados)`, `(Piernas Modificadas)`, `(Casco Modificado)`.
+- Trajes tipo pantalón (Antium, Palatino) usan `(Pantalones)` como marcador para reflejar que son prendas de tela, no armadura rígida. Ej: `Antium Storm (Pantalones)`, `Palatino Shadow Gild (Pantalones)`.
+- Cascos antes sin traducir ahora con marcador unificado: `Argus (Casco)`, `Cyclops (Casco)`, `G-6 (Casco)`, `G-8 (Casco)`, `The Hill Horror (Casco)`, `Snarling Vanduul (Casco)`, `Parasite Replica (Casco)`, `TrueDef-Pro (Pecho)`, `ORC-mkV Crusader Edition (Pecho)`.
+- Corregido typo histórico en Defiance Desert (palabras pegadas sin espacio) → ahora `Defiance Desert (Brazos)` y `Defiance Desert (Casco)`.
+- La tabla de pesos compartida en descripciones de armadura también usa "Pecho" en vez de "Pechera" para coherencia con los nombres.
+- ~1200 entradas tocadas en total.
+
+**Estadísticas:**
+- Líneas en global.ini: 87626 (sin cambio)
+
 ## v1.9.4 — 2026-04-13
 
 **Build:** 4.7.1-HOTFIX_11617053
