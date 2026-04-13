@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.9.4 — 2026-04-13
+
+**Build:** 4.7.1-HOTFIX_11617053
+
+Bump de compatibilidad. El nuevo HOTFIX 11617053 publicado por Star Citizen no toca ninguna cadena de texto del juego, asi que el archivo `global.ini` distribuido es exactamente el mismo que el de v1.9.3. Esta version existe unicamente para que sepas que el parche sigue siendo valido sobre la build vigente y no tengas que adivinarlo.
+
+**Cambios:**
+- Sin cambios en `global.ini` respecto a v1.9.3.
+- ZIP renombrado a v1.9.4 con estructura LIVE + HOTFIX (mismo `global.ini` en ambas carpetas), para que la instalacion sea trivial sobre cualquiera de los dos canales.
+
+**Estadisticas:**
+- Lineas en global.ini: 87626 (sin cambios)
+
 ## v1.9.3 — 2026-04-13
 
 **Build:** 4.7.1-LIVE_11592622 (sin cambio de version del juego)
