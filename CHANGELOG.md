@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.9.8 — 2026-04-19
+
+**Build:** 4.7.1-HOTFIX_11674325
+
+Release de compatibilidad con el nuevo hotfix 4.7.1-HOTFIX_11674325. CIG ha publicado otro hotfix puramente técnico (servidor, netcode, motor): no ha tocado ningún texto en los archivos de localización del juego ni los datos de gameplay.
+
+El `global.ini` distribuido en este release es **byte-idéntico** al de v1.9.7, pero se publica con el build nuevo en el ZIP para que no haya dudas sobre compatibilidad. Si ya tenías v1.9.7 instalado, sigue siendo válido sobre 11674325 y no hace falta actualizar.
+
+**Estadísticas:**
+- Líneas en global.ini: 87 626 (igual que v1.9.7)
+
 ## v1.9.7 — 2026-04-15
 
 **Build:** 4.7.1-HOTFIX_11638371
