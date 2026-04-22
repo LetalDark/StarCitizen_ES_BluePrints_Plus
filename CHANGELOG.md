@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.9.9 — 2026-04-22
+
+**Build:** 4.7.2-LIVE_11674325
+
+Release de compatibilidad con la promoción del build 11674325 de 4.7.1-HOTFIX a 4.7.2-LIVE. El anuncio oficial del 4.7.2 (Nyx Mission Pack 2: nuevas misiones de Courier, Recover Cargo, Ship Wave Attack, Bounty Kill Ship, Bombing Run y Paid Salvage) se activa server-side sobre el mismo build: los archivos de localización y los datos de gameplay del juego no han cambiado. Las misiones nuevas reutilizan plantillas que ya estaban cubiertas y etiquetadas con `[BP]` (CFP, Foxwell, Headhunters, Intersec, Shubin, RDC, BHG…), así que la cobertura de blueprints es del 100 % desde el primer momento.
+
+El `global.ini` es prácticamente idéntico al de v1.9.8, con un microdelta: dos armas de nave (el gatling láser Torral Aggregate S2 y el gatling balístico Gallenson Tactical S1) pasan al formato de stats multilínea nuevo que ya usaban el resto de armas.
+
+**Estadísticas:**
+- Líneas en global.ini: 87 626 (igual que v1.9.8)
+- Cobertura de blueprints en misiones: 100 %
+
 ## v1.9.8 — 2026-04-19
 
 **Build:** 4.7.1-HOTFIX_11674325

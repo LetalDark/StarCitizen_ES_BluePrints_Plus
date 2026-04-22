@@ -260,5 +260,5 @@ La eficiencia del Quantum Drive depende del tanque cuantico de la nave. Se muest
 
 ## Version actual
 
-- **Star Citizen Alpha 4.7.1-HOTFIX** (build 11674325)
+- **Star Citizen Alpha 4.7.2-LIVE** (build 11674325)
 - Ver [CHANGELOG.md](CHANGELOG.md) para el historial completo
