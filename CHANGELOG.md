@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.9.10 — 2026-04-25
+
+**Build:** 4.7.2-HOTFIX_11715810
+
+Release de compatibilidad con el nuevo hotfix 4.7.2-HOTFIX_11715810. CIG ha publicado un hotfix puramente técnico (servidor, netcode, motor): no ha tocado ningún texto en los archivos de localización del juego ni los datos de gameplay (los archivos internos son byte-idénticos al build 11674325).
+
+El `global.ini` distribuido en este release es prácticamente idéntico al de v1.9.8 (mismo MD5). Frente a v1.9.9, se uniforma el formato de stats de dos armas (`item_DescGATS_BallisticGatling_S1` y `item_DescTOAG_LaserGatling_S2`) al formato `[Auto]` consistente con el resto del catálogo de armas de nave.
+
+**Estadísticas:**
+- Líneas en global.ini: 87 626 (igual que v1.9.6/7/8/9)
+- Cobertura de blueprints en misiones: 100 %
+
 ## v1.9.9 — 2026-04-22
 
 **Build:** 4.7.2-LIVE_11674325
