@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.10.1 — 2026-04-30
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11753569 (sin cambios de upstream).
+
+Hotfix puntual del PTU 4.8: las 6 variantes de la misión de
+HeadHunters "Defender ubicación frente a aspirantes/rivales/mercenarios"
+mostraban en la oferta de contrato la lista de planos pegada al
+título, saliéndose del recuadro. La descripción seguía bien; el título
+queda ahora limpio y la lista solo aparece en la descripción.
+
+**Cambios — canal PTU 4.8.0:**
+- Fix títulos de las 6 variantes de misión "Defender ~ubicación~" (E/H/M/S/VE/VH)
+  de HeadHunters: el bloque "Posibles Planos" ya no aparece en el título.
+
+**Cambios — canal LIVE 4.7.2:**
+- Sin cambios (`global.ini` idéntico a v1.10.0).
+
 ## v1.10.0 — 2026-04-30
 
 **Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11753569
