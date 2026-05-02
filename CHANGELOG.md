@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.11.2 — 2026-05-02
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11768487 (sin cambios de upstream).
+
+Fix de dos etiquetas de la barra superior del panel de Ingeniería de las
+naves que se solapaban con el campo vecino. Se aplica a ambos canales
+(LIVE y PTU).
+
+**Cambios — comunes a LIVE 4.7.2 y PTU 4.8.0:**
+- **Barra superior de Ingeniería.** Los labels de la fila de recursos no
+  cabían en su columna y desbordaban contra "Soporte Vital":
+  - `Sistema de refrigeración` → `Refrigeración` (pisaba la etiqueta vecina).
+  - `Combustible de hidrógeno` → `Hidrógeno` (se cortaba al final de la fila).
+
 ## v1.11.1 — 2026-05-02
 
 **Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11768487 (sin cambios de upstream).
