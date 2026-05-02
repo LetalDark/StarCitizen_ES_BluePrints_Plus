@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.11.1 — 2026-05-02
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11768487 (sin cambios de upstream).
+
+Fix de varios textos del mobiGlas que desbordaban su contenedor en la
+interfaz en español. Se aplica a ambos canales (LIVE y PTU).
+
+**Cambios — comunes a LIVE 4.7.2 y PTU 4.8.0:**
+- **Panel del Administrador de Contratos.** Los labels del panel de
+  detalles eran demasiado largos para el ancho de columna que CIG diseñó
+  para los textos en inglés, y empujaban los valores a la siguiente
+  línea, descuadrando la rejilla:
+  - `Recompensa` → `Pago` (cabe en la misma línea que el importe).
+  - `Disponibilidad Del Contrato` → `Disponibilidad` (cabe en la misma
+    línea que el cronómetro; elimina la mayúscula incorrecta de "Del").
+  - `Plazo Del Contrato` → `Plazo` (consistencia con el resto del panel).
+- **Barra inferior del mobiGlas.** Botones que se salían del contenedor:
+  - `Comunicaciones` → `Comunicación` (botón pensado para "Comms").
+  - `Bizum` → `Cartera`. La app de gestión de aUEC pasa a llamarse
+    Cartera, un término genérico de monedero digital que mantiene el
+    significado original ("Wallet") sin usar una marca comercial real.
+
 ## v1.11.0 — 2026-05-02
 
 **Builds:** 4.7.2-LIVE_11715810 (sin cambios) + 4.8.0-PTU_11768487 (nuevo).
