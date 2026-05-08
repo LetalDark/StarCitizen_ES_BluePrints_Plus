@@ -1,5 +1,89 @@
 # Changelog
 
+## v1.13.0 — 2026-05-09
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11777743 (sin cambios de juego;
+refactor interno aplicado a ambos canales).
+
+Refactor masivo de los nombres de equipo (armaduras, prendas, trajes de vuelo,
+cascos) y de las listas de recompensas en misiones. El objetivo es que el
+nombre que aparece en el inventario coincida exactamente con el que aparece en
+las listas de "Posibles Planos" de los paneles de oferta de misión, y que todo
+el catálogo siga la misma convención.
+
+**Cambios principales:**
+
+- **Prendas civiles/militares (~1830 piezas)** — formato unificado
+  `<Set> <Variante> (Tipo)`. Antes mezclaba prefijos heredados
+  (`Camisa Concept Dark Red`, `Selby Jacket Black`); ahora todas siguen el
+  mismo patrón (`Concept Rojo Oscuro (Camisa)`, `Selby Negro (Chaqueta)`).
+  Tags: Pantalones, Zapatos, Botas, Sombrero/Gorro/Gorra, Camisa/Camiseta,
+  Chaqueta, Guantes, Máscara, Mono, Gafas, Chaleco.
+
+- **Limpieza de palabra-tipo redundante (~216 piezas)** — `Brazos PAB-1
+  Woodland (Brazos)` → `PAB-1 Woodland (Brazos)`, `Aril Casco Hazard (Casco)`
+  → `Aril Hazard (Casco)`, `MacFlex Mochila Naranja (Mochila)` → `MacFlex
+  Naranja (Mochila)`, `Rabum Sombrero (Sombrero)` → `Rabum (Sombrero)`.
+
+- **Cascos de subtraje (36 piezas)** — eliminado el doble tag
+  `(Casco) (Subtraje)`. Ahora usan tag compuesto `(Casco de subtraje)`:
+  `Odyssey II Alpha (Casco de subtraje)`, `Calva (Casco de subtraje)`,
+  `Stoneskin Desert (Casco de subtraje)`. Refleja que mecánicamente son la
+  capucha del subtraje, no un casco de combate.
+
+- **Variantes Modificado/Restaurado integradas al tag (15 piezas)** —
+  `FBL-8a (Modified) (Casco)` → `FBL-8a (Casco Modificado)`,
+  `Levin (Refurbished) (Subtraje)` → `Levin (Subtraje Restaurado)`.
+
+- **Refactor de trajes de vuelo aplicado a LIVE (54 piezas)** — el formato
+  unificado introducido en v1.12.0 (solo PTU) ahora también está en LIVE 4.7.2:
+  `Traje de Vuelo Mirai Racing` → `Mirai Racing (Traje carreras)`,
+  `Undersuit Odyssey Desierto` → `Odyssey Desierto (Subtraje)`.
+
+**Unificación EN→ES de variantes (~280 piezas):**
+
+- Colores básicos en variantes simples: Black/White/Red/Blue/Green/Yellow/
+  Orange/Purple/Grey/Gold/Silver/Pink/Brown → traducidos a Negro/Blanco/Rojo/
+  Azul/Verde/Amarillo/Naranja/Morado/Gris/Oro/Plata/Rosa/Marrón.
+- Camuflajes/temas: `Forest Camo` → `Forestal`, `Snow Camo` → `Nevado`,
+  `Desert Camo` → `Desértico`. Sin la palabra "Camuflaje" duplicada en el
+  nombre.
+- Estaciones: Autumn/Winter/Spring/Summer → Otoño/Invierno/Primavera/Verano.
+  Compuestos: `Autumn Amber` → `Ámbar de Otoño`, `Frozen Spring` → `Primavera
+  Helada`.
+- Compuestos color con adjetivo: `Dark Red` → `Rojo Oscuro`, `Dark Blue` →
+  `Azul Oscuro`, `Dark Green` → `Verde Oscuro` (orden invertido al español).
+- Compuestos con marca/edición: `Imperial Red` → `Imperial Rojo`,
+  `Hi-Vis Yellow` → `Hi-Vis Amarillo`.
+- Slash compounds: `Black/Red` → `Negro/Rojo`, `Black/Gold` → `Negro/Oro`,
+  `Grey/White` → `Gris/Blanco`.
+- Calificativo: Tactical → Táctico (17 piezas: Defiance, Calico, Stoneskin,
+  Renegade, DustUp, Deri, Taberna, etc.).
+- Limpieza de "Camuflaje" redundante: `DCP Camuflaje Cazador` → `DCP Cazador`,
+  `Monde Crimson Camuflaje` → `Monde Crimson`.
+- Mantenidos en EN: Hazard (esquema de color industrial), Stealth (variante
+  de componente), ediciones entre comillas (`"Hemlock Camo"`, `"Snow Camo"`,
+  `"Red Wind Edition"`...).
+
+**Listas de "Posibles Planos" en misiones (~370 misiones):**
+
+- Las listas de recompensas en los paneles de oferta de misión ahora
+  coinciden 1:1 con los nombres del inventario. Antes los nombres quedaban
+  congelados con el formato del momento de la generación; ahora siempre
+  reflejan el formato actual.
+- Ejemplo: misiones CFP que listaban `Pechera para la armadura ADP Woodland`
+  ahora muestran `ADP Woodland (Pecho)`, mismo nombre que ves en tu inventario
+  al equipar la pieza.
+- Las anotaciones de localización de variantes regionales (`example
+  locations: Pyro I, PYR1 L1...`) se sustituyen por separadores genéricos
+  `Variante 1/2/...` cuando una misión tiene varias listas — la información
+  textual se ha simplificado a cambio de que el nombre del item siempre sea
+  preciso.
+
+**Estadísticas:**
+- Líneas en global.ini PTU: 88.596 (sin cambios)
+- Líneas en global.ini LIVE: 87.626 (sin cambios)
+
 ## v1.12.0 — 2026-05-06
 
 **Builds:** 4.7.2-LIVE_11715810 + **4.8.0-PTU_11777743** (PTU bumpeado).
