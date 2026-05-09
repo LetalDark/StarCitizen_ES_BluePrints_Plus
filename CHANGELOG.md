@@ -1,5 +1,37 @@
 # Changelog
 
+## v1.13.2 — 2026-05-09
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11777743 (sin cambios de juego;
+correcciones aplicadas a ambos canales).
+
+Parche de 7 items que el juego mostraba con texto crudo del tipo
+`@ITEM_NAME_SRVL_COMBAT_HEAVY_LEGS_03_01_01` en el HUD del mundo, en
+inventario y en cajas de loot. Eran items que el juego sí tenía físicamente
+en los blueprints/loot tables pero a los que les faltaba el nombre y la
+descripción en su tabla de localización. Aprovechamos para añadir las
+piezas que faltaban y traducirlas al español.
+
+**Cambios:**
+
+- Set Wrecker base (variante color común, 4 piezas):
+  - `Wrecker (Casco)`, `Wrecker (Torso)`, `Wrecker (Brazos)`,
+    `Wrecker (Piernas)` — armadura pesada con descripción y stats completos.
+- Variantes de ropa civil con texto crudo:
+  - `Gauntlet (Guantes)` — variante color secundaria de los guantes Gauntlet.
+  - `LNA (Pantalones)` y `LNA (Chaleco)` — prendas civiles del fabricante LNA.
+
+**Pulido interno (no afecta al jugador en este build):**
+
+- Limpieza de un bug acumulativo en 13 misiones: en versiones anteriores el
+  bloque `<EM4>Posibles Planos</EM4>` se duplicaba sigilosamente cada vez
+  que se regeneraba el archivo. Las descripciones afectadas vuelven a
+  mostrar una única lista de posibles recompensas.
+
+**Estadísticas:**
+- Líneas en global.ini LIVE 4.7.2: 87 640 (+14)
+- Líneas en global.ini PTU 4.8.0: 88 610 (+14)
+
 ## v1.13.1 — 2026-05-09
 
 **Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11777743 (sin cambios de juego;
