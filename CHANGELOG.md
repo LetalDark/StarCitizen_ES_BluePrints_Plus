@@ -1,5 +1,53 @@
 # Changelog
 
+## v1.14.0 — 2026-05-09
+
+**Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11811531 "Tactical Strike".
+
+Nuevo build PTU 4.8.0 build 11811531 con cambios masivos: sistema de
+repostaje rediseñado completo (UI, NPCs propios, hints, notificaciones),
+evento DefenseCon 2956 con skins militares, naves nuevas Tiburon, Pitbull,
+Ironclad, M80, Odin, Starlite, MODU bodykits para el Shiv, liveries
+Nightbreak para 12 naves, Flight Blades para 8 naves, Tactical Strike y
+nuevas misiones CFP/Headhunters/blackbox_recover. ~430 claves nuevas
+traducidas + refactor de convención en sufijos de equipo.
+
+**Refactor de convención:**
+
+- **Trajes de carreras** ahora usan el sufijo `(Traje vuelo carreras)`
+  (antes `(Traje carreras)`), alineado con el nombre literal en inglés
+  "Racing Flight Suit". Afecta a Mirai, Origin 350r, Ace Interceptor y
+  Advocacy Interceptor (estos dos últimos retageados por CIG en este parche).
+- **Sistema de repostaje** unificado: los depósitos externos pasan a
+  llamarse `Depósito de combustible` (antes coexistían "Módulo" y "Cápsula"
+  inconsistentemente). Nuevo término `Pluma` para la pieza mecánica
+  extensible que despliega la boquilla. Distinción documentada entre
+  `Atraque` (nave a estación/hangar) y `Acoplamiento` (nave a nave: refueling,
+  snub ships).
+- **Crossbow Novian** (antes "Novia") siguiendo el cambio de nombre que
+  CIG hizo en este parche. La edición Xy'kara mantiene el nombre legacy.
+
+**Bloques traducidos:**
+
+- Sistema de repostaje completo (~46 claves): UI nueva, hints del proceso
+  para el repostador y para el cliente, notificaciones con prefijo
+  "Solicitud denegada:", puertos `Q-Fuel Tank 1-5`, manual del UWC reescrito
+  con 3 párrafos nuevos sobre cómo solicitar repostaje desde el mobiGlas.
+- DefenseCon 2956 (48 claves): descripciones de las skins militares del
+  evento expo de Anvil/Drake/Kruger/Murray Cup, paneles de las facciones
+  Nine Tails/Shattered Blade/XenoThreat y panel Vanduul.
+- Naves nuevas (118 claves): Tiburon, Pitbull, Ironclad, M80, Odin, Starlite
+  con sus liveries, MODU bodykits para el Shiv (Slasher/Barebones/Lunatic),
+  decks y rooms del Odin.
+- Items varios (216 claves): liveries Nightbreak para 12 naves, Flight Blades
+  PHB/TSB/standard para 8 naves, trajes Tailwind, armadura Testudo Purgatory
+  Camo, variantes Crossbow, Bobcat Bomber Jacket, bastidores de misiles MRCK,
+  Echion Repeater, port_NameCosmetic, event_ShipName.
+
+**Estadísticas:**
+
+- Líneas en `global.ini` PTU: 89.001 (LIVE 4.7.2 sin cambios: 87.640).
+
 ## v1.13.2 — 2026-05-09
 
 **Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11777743 (sin cambios de juego;
