@@ -62,8 +62,11 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 | 19 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 | 20 | Loadout Calculator JSON | Masa y fórmulas de velocidad (Sprint, Run, ADS, Duration) para calculadora externa | 199 | Tests in-game |
 | 21 | CIG missing strings parcheados (v1.13.2) | Items que el juego mostraba con texto crudo `@ITEM_NAME_...` por faltar la entrada de localización: set Wrecker base + variantes ropa civil. Se retira el override cuando el juego los localice | 14 | Verificacion manual |
+| 22 | Textos restaurados del sistema de Repostaje (v1.16.0) | El juego retiró 254 textos del rework de Repostaje (hints, notificaciones, diario, diálogos NPC, tooltips) pero su código sigue consultándolos. Restauramos las traducciones del build anterior hasta que el juego se reconcilie | 254 (solo PTU) | Restauración automática |
+| 23 | Contratos curados con marca asterisco (v1.16.0) | 97 contratos nuevos del juego sin texto oficial (Adagio Component, GoblinG, Certificaciones BHG, Mods ATLS, EliminateAll Rockcracker, Highpoint Killanimals, Maintenance, KillShip_FF, etc.). Texto provisional siguiendo el estilo de cada facción + marca `*` al inicio para distinguir traducción provisional. Se retira cuando el juego los localice | 97 (solo PTU) | Verificacion manual |
+| 24 | Auto-placeholders para contratos sin texto (v1.16.0) | 242 referencias internas del juego a textos que aún no existen en ningún idioma oficial. Mostramos un nombre humanizado con marca `*` para que el panel no aparezca con un código crudo | 242 (solo PTU) | Auto-generado |
 
-**Total: 87 640 claves (LIVE 4.7.2) — 87 591 claves (PTU 4.8.0 build 11812390 "Tactical Strike")**
+**Total: 87 640 claves (LIVE 4.7.2) — 88 308 claves (PTU 4.8.0 build 11812390 "Tactical Strike")**
 
 ## Instalacion
 

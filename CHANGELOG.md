@@ -1,5 +1,42 @@
 # Changelog
 
+## v1.16.0 — 2026-05-11
+
+**Builds:** 4.7.2-LIVE_11715810 (sin cambios) + 4.8.0-PTU_11812390 "Tactical Strike" (mismo build, contenido restaurado).
+
+Esta release rescata cientos de textos del PTU 4.8.0 que aparecían vacíos o con códigos crudos (`@KEY` literal). El juego retiró 1411 claves del build anterior pero su código sigue consultando muchas — un bug típico de PTU donde código y datos se desincronizan temporalmente. Hemos preservado las traducciones del build anterior y añadido textos provisionales para los nuevos contratos que aún no tenían localización oficial.
+
+**Cambios visibles in-game:**
+
+- **Versión correcta en el menú principal**: el texto de la parte superior izquierda ahora dice "4.8.0 - Tactical Strike" en vez de aparecer vacío o con un código.
+- **Asignación de teclas — Repostaje**: las dos opciones del menú de modos de operador (Alternar y Configurar Modo de Operador de Reabastecimiento) ahora aparecen en español. Antes pintaban un código `@ui_CIRefuelMode` y `@ui_v_set_refuel_mode`.
+- **Mobiglas — Diario**: la entrada del Protocolo de Repostaje vuelve a mostrarse correctamente. Antes aparecía con un código crudo.
+- **Mobiglas — Balizas**: el dropdown "Servicio de repostaje", el aviso "El precio lo establecerá el repostador..." y los tooltips de baliza (cooldown, ya activa, seleccionar tipo) están traducidos. Antes aparecían como códigos.
+- **Mobiglas — Contratos**: muchas misiones de Mercenario, Recolección, Búsqueda, Entrega, Minería, Prioridad y Repostaje que aparecían con título y descripción vacíos ahora muestran texto:
+  - **Contratos restaurados de Foxwell Enforcement** (DefendDestructibleEntities, EscortShips, SecurityPatrol, ShipAmbush, etc.).
+  - **Misiones de BitZeros BlackBox Recovery** (caja negra de Constellation) en Stanton y Nyx.
+  - **Minería manual Shubin** (instrucciones de zona, recompensas en planos).
+  - **Adagio Holdings — chatarrería**: los contratos genéricos vuelven a aparecer con su descripción completa.
+- **Contratos sin localización oficial**: hemos añadido texto provisional para 97 contratos nuevos del juego que aún no tenían traducción al inglés ni al español oficial. Estos textos llevan un asterisco `*` al inicio para que sepas que son provisionales y se reemplazarán automáticamente cuando el juego los localice oficialmente. Incluye:
+  - **Adagio Holdings — Component Salvage** (Levski, Pyro, Stanton, Universal en 3 tiers).
+  - **GoblinG** (nuevo NPC en ArcCorp/Crusader/Hurston/MicroTech: carga, recuperación, recursos).
+  - **Bounty Hunters Guild — Certificaciones** (6 niveles de certificación).
+  - **The Collector — Mod ATLS Geo** (3 grados de mejora para exoesqueleto).
+  - **CFP / Headhunters — EliminateAll Rockcracker** (limpiar zonas de instalación minera).
+  - **Headhunters / Foxwell — EliminateAllFF** (eliminar Frontier Fighters).
+  - **Highpoint Wilderness Specialists** — cazas de fauna en cuevas y outposts.
+  - **CFP / Headhunters — Maintenance y KillShip_FF** (contratos de mantenimiento y persecución).
+- **[BP] consistente**: los títulos que llevan el marcador `[BP]` ahora siempre tienen su bloque "Posibles Planos" en la descripción. Antes, si el juego retiraba un pool entre versiones, el `[BP]` quedaba huérfano en el título sin lista de recompensas debajo. Hemos limpiado 60 marcadores zombi.
+
+**Bug conocido del juego en este PTU (no es nuestro):**
+
+- Algunas misiones de la categoría **Prioridad** del Foxwell Enforcement (las que enlazan con `TheBackpocket` / `RoX_Idders`) aparecen con título y descripción vacíos en el panel de oferta. Estos contratos los envía el servidor del juego directamente con su texto, no consultan ninguna localización local. Es un bug del backend del juego en este build PTU que afecta a todos los idiomas. Al **aceptar** el contrato, los objetivos aparecen normalmente.
+
+**Estadísticas:**
+
+- LIVE 4.7.2: 87.640 claves (sin cambios).
+- PTU 4.8.0: 88.308 claves (+717 vs versión anterior — todas son contenido restaurado o nuevo añadido por el rework de Repostaje del juego que estaba sin localizar oficialmente).
+
 ## v1.15.0 — 2026-05-11
 
 **Builds:** 4.7.2-LIVE_11715810 (sin cambios) + 4.8.0-PTU_11812390 "Tactical Strike" (nuevo build PTU).
