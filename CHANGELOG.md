@@ -1,5 +1,31 @@
 # Changelog
 
+## v1.15.0 — 2026-05-11
+
+**Builds:** 4.7.2-LIVE_11715810 (sin cambios) + 4.8.0-PTU_11812390 "Tactical Strike" (nuevo build PTU).
+
+El juego ha hecho una limpieza masiva en este build PTU (1411 claves retiradas vs el build anterior). Traemos 70 traducciones nuevas para los textos que sí siguen activos y una mejora importante en la categorización de cascos y trajes de pilotaje.
+
+**Cambios visibles in-game:**
+
+- **70 textos nuevos traducidos**: diálogos de comentaristas en carreras (Lose Position / Moving Up Position), NPCs callejeros y de seguridad (PU_HAWKER, PU_GENNPC, PU_GENOUTLAW4, PU_GENSECR2), avisos del DefenseCon y de la Crusader Liberation, tutorial de contramedidas, sensores con voz específica por fabricante (ANVL/ORIG/RSI), nombres del HUD de torreta del Scorpius (Superior/Inferior), propulsores Hammer Propulsion HMX 4.3, ficha de tienda del RSI Constellation Aquila, ajustes de seguimiento de cabeza Tobii, contrato Hurston de protección de instalación, nueva facción Sidekick Shuttles.
+- **Categorización por tipo real**: los cascos y trajes de pilotaje ahora muestran su categoría según las estadísticas reales del juego, no según el nombre técnico. Esto corrige varios casos donde el descriptor estaba mal:
+  - **Cascos Odyssey** (10 variantes: Tan, Aqua, Orange, Black, Exec, Sunset, Dark Green, Orange/Blue, White/Orange, Black/Gold) ahora aparecen como `(Casco carreras)` — antes salían como `(Casco vuelo)`. Son cascos de carreras (G=0%, sin penalización al pilotar) según las stats del juego.
+  - **Origin Mirai** (traje) ahora aparece como `(Traje vuelo carreras)` — antes salía como `(Traje vuelo)`. Sus stats coinciden con un traje de carreras (G=+100%) aunque el juego lo etiquetaba mal como traje de vuelo normal.
+  - **Aliases consolidados**: trajes con tipo no traducido (`undersuit`, `Undersuit`, `Mono de trabajo`) ahora muestran `(Subtraje)` consistentemente.
+- **Refactor de nomenclatura del juego**: el juego ha simplificado nombres en inglés de ~250 cascos y trajes quitando los adjetivos "Racing", "Flight", "Racing Flight" (ej. `Sol-III Flight Helmet Aviator` → `Sol-III Helmet Aviator`). Mantenemos los descriptores parentéticos en español (`(Casco vuelo)`, `(Traje vuelo carreras)`, etc.) porque categorizan por stats y siguen aportando información útil al jugador.
+- **Tolerancia G preservada pese a bug temporal**: el juego ha retirado temporalmente del data la propiedad que exponía la tolerancia G de cada pieza. Nuestro pipeline detecta este caso y preserva las 790 líneas "Tolerancia a fuerza G" del build anterior hasta que el juego restaure el campo (esperado en 4.8.0 LIVE).
+- **Otros ajustes narrativos**: `Liquid Fuel Tanks` (Tanques de combustible líquido), `Scan for all targets` (escaneo de objetivos), `Power Plant Failure` (fallo de generador), `Bricking: %.1f s` (formato decimal de inutilización), Vehicle UTV ahora es de **carga** (no pasajeros), añadido "Mk I" a las variantes cortas del Aurora (CL/ES/LN/LX), ascensores Pyro `B1..B10` sin prefijo "Planta" (literal del juego), Antium retageado, AVS-E renombrado a APOS, módulos Retaliator pasan de Ordnance a Torpedo.
+- **Correcciones puntuales**:
+  - Hephaestanite (Bto): el juego ha renombrado internamente la clave; mantenida la traducción correcta para que no aparezca el texto crudo en inglés.
+  - Vehicle UTV: el descriptor "Enfoque" ahora dice "Carga" en vez de "Pasajeros" tras el cambio del juego.
+  - Fabricator AA: corregimos el typo "Suport" del juego con la traducción correcta "Soporte".
+
+**Notas:**
+
+- Esta release lleva el `global.ini` del LIVE 4.7.2 sin cambios (idéntico a la versión anterior) y el del PTU 4.8.0 actualizado al nuevo build. Si solo juegas en LIVE no necesitas actualizar.
+- En el PTU el ZIP también añade `user.cfg` automáticamente con el idioma forzado a español.
+
 ## v1.14.1 — 2026-05-09
 
 **Builds:** 4.7.2-LIVE_11715810 + 4.8.0-PTU_11811531 "Tactical Strike" (sin cambios upstream — patch interno).

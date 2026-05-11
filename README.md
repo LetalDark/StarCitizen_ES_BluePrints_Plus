@@ -54,8 +54,8 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 | 12 | Limpieza | Trailing spaces eliminados | 607 | BeltaKoda |
 | 13 | Stats armas FPS | DPS, Alpha, Vel, Peso, Caida de daño, modos de fuego | 295 | Tests in-game + Data.p4k |
 | 14 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
-| 15 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto (datos del juego desde v1.14.1) | 713 LIVE / 836 PTU | Datos del juego |
-| 15b | Tolerancia a fuerza G | Penalización/bonus de tolerancia a fuerzas G por pieza (subtrajes +90/+97.5/+100%, armadura pesada −12.5/−25/−50%, cascos vuelo −2.5%, cascos carreras 0%) — v1.14.1 | — / 839 PTU | Datos del juego |
+| 15 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto (datos del juego desde v1.14.1) | 713 LIVE / 787 PTU | Datos del juego |
+| 15b | Tolerancia a fuerza G | Penalización/bonus de tolerancia a fuerzas G por pieza (subtrajes +90/+97.5/+100%, armadura pesada −12.5/−25/−50%, cascos vuelo −2.5%, cascos carreras 0%) — v1.14.1 | — / 790 PTU | Datos del juego |
 | 16 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
 | 17 | Correcciones manuales | Nombres armadura normalizados al formato `<Set> (Parte)`, trajes de exploración Novikov/Pembroke/Zeus/Stirling con `(Traje exploración)`, cascos de carreras (refactor v1.14.0: `Traje vuelo carreras`), traducciones recuperadas, fixes doble paréntesis | 275 | Verificacion manual |
 | 18 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
@@ -63,7 +63,7 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 | 20 | Loadout Calculator JSON | Masa y fórmulas de velocidad (Sprint, Run, ADS, Duration) para calculadora externa | 199 | Tests in-game |
 | 21 | CIG missing strings parcheados (v1.13.2) | Items que el juego mostraba con texto crudo `@ITEM_NAME_...` por faltar la entrada de localización: set Wrecker base + variantes ropa civil. Se retira el override cuando el juego los localice | 14 | Verificacion manual |
 
-**Total: 87 640 claves (LIVE 4.7.2) — 89 001 claves (PTU 4.8.0 build 11811531 "Tactical Strike")**
+**Total: 87 640 claves (LIVE 4.7.2) — 87 591 claves (PTU 4.8.0 build 11812390 "Tactical Strike")**
 
 ## Instalacion
 
@@ -289,5 +289,5 @@ La eficiencia del Quantum Drive depende del tanque cuantico de la nave. Se muest
 Release dual-canal: el ZIP contiene un `global.ini` por cada rama del juego.
 
 - **Canal LIVE: Star Citizen Alpha 4.7.2-LIVE** (build 11715810)
-- **Canal PTU: Star Citizen Alpha 4.8.0-PTU "Tactical Strike"** (build 11811531)
+- **Canal PTU: Star Citizen Alpha 4.8.0-PTU "Tactical Strike"** (build 11812390)
 - Ver [CHANGELOG.md](CHANGELOG.md) para el historial completo
