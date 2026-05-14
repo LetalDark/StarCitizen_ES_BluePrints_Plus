@@ -42,9 +42,9 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 |---|---|---|---|---|
 | 1 | Traduccion base ES | Traduccion comunitaria completa al español | 87.591 | Thord82 |
 | 2 | Blueprints misiones | Planos posibles en misiones, traducidos al ES + correcciones | 502 | MrKraken + nuestras |
-| 3 | Traducciones p4k | Claves que faltan en Thord82, traducidas del ingles oficial | 82 | Data.p4k CIG |
-| 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 227 LIVE / 291 PTU | datos del juego |
-| 5 | Posibles Planos auto-generados | Bloque "Posibles Planos" en descripciones, generado automaticamente desde los datos del juego resolviendo cada blueprint a su nombre español (v1.10.0) | 287 LIVE / 408 PTU | datos del juego |
+| 3 | Traducciones p4k | Claves que faltan en Thord82, traducidas del ingles oficial | 529 | Data.p4k CIG |
+| 4 | [BP] en titulos | Marca `[BP]` en misiones que dan blueprints | 298 | datos del juego |
+| 5 | Posibles Planos auto-generados | Bloque "Posibles Planos" en descripciones, generado automaticamente desde los datos del juego resolviendo cada blueprint a su nombre español (v1.10.0) | 444 | datos del juego |
 | 6 | Componentes clase/grado | Prefijo `[MIL\|2\|A]`, `[CIV\|1\|C]`, etc. en componentes de naves | 382 | datos del juego |
 | 7 | Misiles y bombas | Tracking type `IR`/`EM`/`CS` en misiles, tamaño `B#` en bombas (estilo uniforme) | 136 | datos del juego |
 | 8 | Sustancias ilegales | Marca `[!]` en drogas (WiDoW, SLAM, Maze, etc.) | 8 | ExoAE |
@@ -54,31 +54,28 @@ Aunque desde v1.9.0 el proyecto es independiente y solo recibe deltas automatico
 | 12 | Limpieza | Trailing spaces eliminados | 607 | BeltaKoda |
 | 13 | Stats armas FPS | DPS, Alpha, Vel, Peso, Caida de daño, modos de fuego | 295 | Tests in-game + Data.p4k |
 | 14 | Stats cargadores | Peso del cargador | 42 | Tests in-game |
-| 15 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto (datos del juego desde v1.14.1) | 713 LIVE / 787 PTU | Datos del juego |
-| 15b | Tolerancia a fuerza G | Penalización/bonus de tolerancia a fuerzas G por pieza (subtrajes +90/+97.5/+100%, armadura pesada −12.5/−25/−50%, cascos vuelo −2.5%, cascos carreras 0%) — v1.14.1 | — / 790 PTU | Datos del juego |
+| 15 | Stats armaduras | Peso, Reduccion Stun, Reduccion Impacto (datos del juego desde v1.14.1) | 787 | Datos del juego |
+| 15b | Tolerancia a fuerza G | Penalización/bonus de tolerancia a fuerzas G por pieza (subtrajes +90/+97.5/+100%, armadura pesada −12.5/−25/−50%, cascos vuelo −2.5%, cascos carreras 0%) — v1.14.1 | 790 | Datos del juego |
 | 16 | Stats ropa y accesorios | Peso de ropa, calzado, mochilas, accesorios arma, multitools, granadas y mas | 910 | Tests in-game |
 | 17 | Correcciones manuales | Nombres armadura normalizados al formato `<Set> (Parte)`, trajes de exploración Novikov/Pembroke/Zeus/Stirling con `(Traje exploración)`, cascos de carreras (refactor v1.14.0: `Traje vuelo carreras`), traducciones recuperadas, fixes doble paréntesis | 275 | Verificacion manual |
 | 18 | Stats armas de nave | DPS, Alpha, RPM, Vel, Rango, Penetracion, Dispersión, Capacitor, Masa, HP, EM, Energía, AoE | 122 | Datos del juego |
 | 19 | Stats componentes nave | Power Plants, Quantum Drives, Jump Drives, Shields, Coolers, Radars | 334 | Datos del juego |
 | 20 | Loadout Calculator JSON | Masa y fórmulas de velocidad (Sprint, Run, ADS, Duration) para calculadora externa | 199 | Tests in-game |
 | 21 | CIG missing strings parcheados (v1.13.2) | Items que el juego mostraba con texto crudo `@ITEM_NAME_...` por faltar la entrada de localización: set Wrecker base + variantes ropa civil. Se retira el override cuando el juego los localice | 14 | Verificacion manual |
-| 22 | Textos restaurados del sistema de Repostaje (v1.16.0) | El juego retiró 254 textos del rework de Repostaje (hints, notificaciones, diario, diálogos NPC, tooltips) pero su código sigue consultándolos. Restauramos las traducciones del build anterior hasta que el juego se reconcilie | 254 (solo PTU) | Restauración automática |
-| 23 | Contratos curados con marca asterisco (v1.16.0) | 97 contratos nuevos del juego sin texto oficial (Adagio Component, GoblinG, Certificaciones BHG, Mods ATLS, EliminateAll Rockcracker, Highpoint Killanimals, Maintenance, KillShip_FF, etc.). Texto provisional siguiendo el estilo de cada facción + marca `*` al inicio para distinguir traducción provisional. Se retira cuando el juego los localice | 97 (solo PTU) | Verificacion manual |
-| 24 | Auto-placeholders para contratos sin texto (v1.16.0) | 242 referencias internas del juego a textos que aún no existen en ningún idioma oficial. Mostramos un nombre humanizado con marca `*` para que el panel no aparezca con un código crudo | 242 (solo PTU) | Auto-generado |
+| 22 | Textos restaurados del sistema de Repostaje (v1.16.0) | El juego retiró 254 textos del rework de Repostaje (hints, notificaciones, diario, diálogos NPC, tooltips) pero su código sigue consultándolos. Restauramos las traducciones del build anterior hasta que el juego se reconcilie | 254 | Restauración automática |
+| 23 | Contratos curados con marca asterisco (v1.16.0) | 97 contratos nuevos del juego sin texto oficial (Adagio Component, GoblinG, Certificaciones BHG, Mods ATLS, EliminateAll Rockcracker, Highpoint Killanimals, Maintenance, KillShip_FF, etc.). Texto provisional siguiendo el estilo de cada facción + marca `*` al inicio para distinguir traducción provisional. Se retira cuando el juego los localice | 97 | Verificacion manual |
+| 24 | Auto-placeholders para contratos sin texto (v1.16.0) | 242 referencias internas del juego a textos que aún no existen en ningún idioma oficial. Mostramos un nombre humanizado con marca `*` para que el panel no aparezca con un código crudo | 242 | Auto-generado |
 
-**Total: 87 640 claves (LIVE 4.7.2) — 89 390 claves (PTU 4.8.0 RC1 build 11817467 "Tactical Strike")**
+**Total: 89 388 claves (LIVE 4.8.0 build 11825000 "Tactical Strike")**
 
 ## Instalacion
 
 1. Descarga el ZIP de la ultima release
 2. Extrae el contenido en la carpeta de Star Citizen (ej: `C:\Program Files\Roberts Space Industries\StarCitizen\`)
-3. La estructura queda asi (cada carpeta es un canal del RSI Launcher; instala solo la que uses):
+3. La estructura queda asi (la carpeta es el canal del RSI Launcher):
 ```
 StarCitizen/
-├── LIVE/
-│   ├── data/Localization/spanish_(spain)/global.ini
-│   └── user.cfg
-└── PTU/
+└── LIVE/
     ├── data/Localization/spanish_(spain)/global.ini
     └── user.cfg
 ```
@@ -289,8 +286,7 @@ La eficiencia del Quantum Drive depende del tanque cuantico de la nave. Se muest
 
 ## Version actual
 
-Release dual-canal: el ZIP contiene un `global.ini` por cada rama del juego.
+El ZIP contiene el `global.ini` para el canal LIVE.
 
-- **Canal LIVE: Star Citizen Alpha 4.7.2-LIVE** (build 11715810)
-- **Canal PTU: Star Citizen Alpha 4.8.0-PTU "Tactical Strike"** (RC1 build 11817467)
+- **Canal LIVE: Star Citizen Alpha 4.8.0-LIVE "Tactical Strike"** (build 11825000)
 - Ver [CHANGELOG.md](CHANGELOG.md) para el historial completo

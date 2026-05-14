@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.18.0 — 2026-05-14
+
+Star Citizen Alpha 4.8.0 "Tactical Strike" llega a LIVE estable (build 11825000). Esta versión es la promoción del canal PTU a LIVE: el texto oficial del juego es idéntico al del último RC, así que todo el trabajo de traducción de la 4.8.0 se mantiene tal cual.
+
+**Cambios:**
+
+- Build LIVE estable de la 4.8.0 — todo el contenido traducido durante la PTU (evento DefenseCon 2956, sistema de Repostaje rediseñado, contratos Foxwell y UWC, etc.) pasa a LIVE.
+- Corregida la marca `[BP]` fantasma en 12 contratos de salvamento de Adagio: aparecían marcados como "dan planos" pero sin la lista de planos posibles en su descripción, porque el juego todavía no ha publicado el nombre de esos planos. Ahora no se marcan hasta que el juego los localice.
+
+**Estadísticas:**
+- Líneas en global.ini: 89 388
+
 ## v1.17.0 — 2026-05-12
 
 **Builds:** 4.7.2-LIVE_11715810 (sin cambios) + 4.8.0-PTU RC1 build 11817467 "Tactical Strike" (build nuevo, contenido masivo restaurado y traducido).
