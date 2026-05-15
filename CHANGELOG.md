@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.19.0 — 2026-05-15
+
+Actualización de los stats medidos in-game para 4.8.0 al publicarse la nueva versión del spreadsheet comunitario de medidas.
+
+**Cambios:**
+
+- Refrescados los valores de las descripciones de armas FPS, cargadores, accesorios y armaduras (DPS, daño por disparo, cadencia, peso, caída de daño, etc.) con las medidas in-game actualizadas para la 4.8. Esta release no añade ni quita entradas: solo se actualizan valores numéricos sobre las descripciones ya existentes.
+
+**Estadísticas:**
+
+- Líneas en global.ini: 89 194 (sin cambios)
+- Valores actualizados: 365
+
 ## v1.18.2 — 2026-05-14
 
 Corrección de textos provisionales que tapaban el texto real de varias misiones.
