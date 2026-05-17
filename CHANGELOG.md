@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.19.1 — 2026-05-17
+
+Corrección de un fallo de formato en las descripciones de tres armas montadas en naves y un retoque en la batería de la multiherramienta.
+
+**Cambios:**
+
+- Las descripciones de la YellowJacket GT-210 Gatling, el Thlilye Laser Gatling y el CF-117 Bulldog Repeater ATLS vuelven a mostrar el formato detallado con HP, EM y consumo de energía (estaban quedando con un formato resumido pensado para armas de infantería).
+- Corregida la descripción de la batería de la multiherramienta Pyro RYT de Greycat, que mostraba el peso duplicado.
+
+**Estadísticas:**
+
+- Líneas en global.ini: 89 194 (sin cambios)
+- Entradas modificadas: 4
+
 ## v1.19.0 — 2026-05-15
 
 Actualización de los stats medidos in-game para 4.8.0 al publicarse la nueva versión del spreadsheet comunitario de medidas.
